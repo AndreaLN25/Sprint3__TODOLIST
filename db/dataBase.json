@@ -1,0 +1,40 @@
+{
+    "tareas":[
+           
+        {
+            "task_id": 1,
+            "task_description": "descripcion1",
+            "task_status": "pendiente",
+            "task_creation_date": "",
+            "task_deadline": "",
+            "id_user": 1
+        },
+        {
+            "task_id": 2,
+            "task_description": "descripcion2",
+            "task_status": "pendiente",
+            "task_creation_date": "",
+            "task_deadline": "",
+            "id_user": 2
+        },
+        {
+            "task_id": 3,
+            "task_description": "descripcion3",
+            "task_status": "pendiente",
+            "task_creation_date": "",
+            "task_deadline": "",
+            "id_user": 3
+        },
+        {
+            "task_id": 4,
+            "task_description": "descripcion4",
+            "task_status": "pendiente",
+            "task_creation_date": "",
+            "task_deadline": "",
+            "id_user": 4
+        }
+    ]
+}
+              
+           
+      
