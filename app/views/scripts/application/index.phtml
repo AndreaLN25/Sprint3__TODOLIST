@@ -1,0 +1,26 @@
+content from the test/index.phtml file :)
+<?php echo $this->message;
+
+ ?>
+<!DOCTYPE html>
+<html>
+    <table>
+        <thead>
+            <tr>
+                <th>Task ID</th>
+                <th>Description</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach($this->tasks['tareas'] as $task): ?>
+                <tr>
+                    <td><?php echo $task['task_id'];?></td>
+                    <td><?php echo $task['task_description'];?></td>
+                    <td><?php echo $task['task_status'];?></td>        
+                </tr>
+                <?php endforeach?>     
+        </tbody>        
+    </table>
+
+</html>
