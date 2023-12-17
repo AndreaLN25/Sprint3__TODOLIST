@@ -12,5 +12,7 @@
 $routes = array(
 	'/test' => 'test#index',
 	'/'  =>'application#index',
-	'/A_IT_ACADEMY_FULL_STACK_PHP/Sprint3__TODOLIST/web/Application' => 'Application#index',
+	'/getTasks' => 'application#getTasks',
+	'/createTask' => 'application#createTask'
+
 );

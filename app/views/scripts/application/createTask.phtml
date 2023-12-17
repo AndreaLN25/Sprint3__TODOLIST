@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Task</title>
+</head>
+<body>
+    <h2>Create New Task</h2>
+    <form method="post" action="/createTask">
+        <label for="task_description">Description:</label>
+        <input type="text" id="task_description" name="task_description"><br><br>
+
+        <label for="task_status">Status:</label>
+        <select id="task_status" name="task_status">
+            <option value="pending">Pending</option>
+            <option value="in_progress">In Progress</option>
+            <option value="completed">Completed</option>
+        </select><br><br>
+
+        <label for="task_deadline">Deadline:</label>
+        <input type="date" id="task_deadline" name="task_deadline"><br><br>
+
+
+        <input type="submit" value="Create Task">
+        <a href="/getTasks">Go Back to Tasks</a>
+    </form>
+</body>
+</html>

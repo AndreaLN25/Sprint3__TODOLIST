@@ -15,13 +15,27 @@ class TaskModel extends Model{
         //var_dump($this->tasks);
         return $this->tasks;
     }
-    /*
-
+    
+    private function saveTasks($tasks){
+        $newJsonContent = json_encode($tasks, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+        file_put_contents($this->json , $newJsonContent);
+    }
     public function getTasks(){
         $jsonContent = file_get_contents($this->json);
         $tasks = json_decode($jsonContent, true, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
         return $tasks;
     }
+
+    public function createTask($newTask){
+        $tasks = $this->getTasks();
+        $tasks[] = $newTask;
+        $this->saveTasks($tasks);
+       
+    }
+    
+    /*
+
+
     public function getTaskById($id){
         $tasks = $this->getTasks();
         foreach($tasks as $task){
@@ -31,16 +45,7 @@ class TaskModel extends Model{
         } 
         return "Task not found";
     }
-    public function createTask($newTask){
-        $tasks = $this->getTasks();
-        $tasks[] = $newTask;
-        $this->saveTasks($tasks);
-       
-    }
-    private function saveTasks($tasks){
-        $newJsonContent = json_encode($tasks, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
-        file_put_contents($this->json , $newJsonContent);
-    }
+
 
     public function deleteTask($taskId){
         $tasks = $this->getTasks();
