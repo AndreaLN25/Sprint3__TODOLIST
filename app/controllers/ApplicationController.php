@@ -30,12 +30,14 @@ class ApplicationController extends Controller
 	}*/
 
 	public function getTasksAction(){  
-        $allTasks = [];
-        $dataJson = new TaskModel();
+		$taskModel = new TaskModel();
+        $allTasks = $taskModel->getTasks();
         //$this->view->allTasks = $dataJson->getTasks();
-		$this->view->render('application/index');
-        //return $allTasks;
-    }	
+		//var_dump($allTasks);
+		$this->view->allTasks = $allTasks; // Asignar las tareas a la vista
+
+        $this->view->render('scripts/application/getTasks'); // Renderizar la vista correspondiente
+    }
 
 
 	public function createTaskAction() {
@@ -63,6 +65,4 @@ class ApplicationController extends Controller
 		// Si no es una solicitud POST, mostrar el formulario
 		$this->view->render('createTaskForm');
 	}
-	
-
 }

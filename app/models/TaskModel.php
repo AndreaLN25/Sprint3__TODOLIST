@@ -20,12 +20,32 @@ class TaskModel extends Model{
         $newJsonContent = json_encode($tasks, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
         file_put_contents($this->json , $newJsonContent);
     }
+    
     public function getTasks(){
         $jsonContent = file_get_contents($this->json);
         $tasks = json_decode($jsonContent, true, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
         return $tasks;
     }
 
+
+   /* public function getTasks(): array {
+        $jsonContent = file_get_contents($this->json);
+        
+        if ($jsonContent === false) {
+            echo "Error: No se pudo cargar el contenido del archivo JSON.";
+            return [];
+        }
+
+        $tasks = json_decode($jsonContent, true);
+
+        if (!isset($tasks)) {
+            echo "Error: No se encontró la clave 'tasks' en el archivo JSON.";
+            return [];
+        }
+
+        return $tasks;
+    }
+    */
     public function createTask($newTask){
         $tasks = $this->getTasks();
         $tasks[] = $newTask;
