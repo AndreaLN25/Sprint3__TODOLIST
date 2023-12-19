@@ -1,0 +1,27 @@
+{
+    "usuarios":[
+           
+        {
+            "user_name": "rami123",
+            "id_user": 1,
+            "password": 123,
+            "email": "ponla@gmail.com"
+        },
+        {
+            "user_name": "rami123",
+            "id_user": 1,
+            "password": 123,
+            "email": "juan@gmail.com"
+        },
+        {
+            "user_name": "rami123",
+            "id_user": 1,
+            "password": 123,
+            "email": "alen21@gmail.com"
+        }
+
+    ]
+}
+              
+           
+      
