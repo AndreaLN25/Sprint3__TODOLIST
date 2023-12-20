@@ -64,7 +64,13 @@ function saveTaskList($lista){//!!!!ESTO DEBERIA IR EN EL CONTROLADOR?¿?!!!!
     $numeroLista = rand(1,1000);//numero random para cada archivo que se genere (puede ocurrir q se generen dos listas con el mismo numero y pete XD aunq la probabilidad es baja teniendo en cuenta que es hasta 1000)
     $nombreArchivoLista = "Lista$numeroLista.json";
 
-    file_put_contents($nombreArchivoLista,$listaJson);
+    // Ruta a la carpeta 'db' donde deseas guardar los archivos
+    $ruta_db = 'C:/Users/formacio/Desktop/Sprint3__TODOLIST/db/';
+
+    // Ruta completa al archivo de la lista en la carpeta 'db'
+    $rutaCompleta = $ruta_db . $nombreArchivoLista;
+
+    file_put_contents($rutaCompleta, $listaJson);
 }
 
 $ruta_json = 'C:/Users/formacio/Desktop/Sprint3__TODOLIST/db/dataBase.json';
