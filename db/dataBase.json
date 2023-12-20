@@ -7,8 +7,7 @@
             "task_status": "pendiente",
             "task_creation_date": "",
             "task_deadline": "",
-            "id_user": 1,
-            "task_priority": 3
+            "id_user": 1        
         },
         {
             "task_id": 2,
@@ -16,9 +15,7 @@
             "task_status": "pendiente",
             "task_creation_date": "",
             "task_deadline": "",
-            "id_user": 2,
-            "task_priority": 1
-
+            "id_user": 2
         },
         {
             "task_id": 3,
@@ -26,9 +23,7 @@
             "task_status": "pendiente",
             "task_creation_date": "",
             "task_deadline": "",
-            "id_user": 3,
-            "task_priority": 2
-
+            "id_user": 3
         },
         {
             "task_id": 4,
@@ -36,8 +31,7 @@
             "task_status": "pendiente",
             "task_creation_date": "",
             "task_deadline": "",
-            "id_user": 4,
-            "task_priority": 3
+            "id_user": 4        
         }
     ]
 }
