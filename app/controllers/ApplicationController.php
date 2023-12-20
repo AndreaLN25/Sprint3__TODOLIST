@@ -13,7 +13,8 @@ class ApplicationController extends Controller
         if($_SERVER["REQUEST_METHOD"]=="POST"){
             $username = $_POST["username"];
             $password = $_POST["password"];
-            $loginResult=$loginAttempt->validateUser($username,$password);
+            $loginResult=$loginAttempt->validateUser($username,$password,);
+            var_dump($loginResult);
             if($loginResult == true){
                 $this->view->mensaje = "Ha sido exitoso el registro de usuario";
                 var_dump($username);
@@ -23,7 +24,7 @@ class ApplicationController extends Controller
             }
             else{
                 $this->view->mensaje = "Usuario no valido";
-                var_dump($username);
+                //var_dump($username);
             }
         }
 		   // Lógica del controlador
