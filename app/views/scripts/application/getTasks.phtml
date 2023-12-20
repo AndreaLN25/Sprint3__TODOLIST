@@ -6,7 +6,7 @@
 <body>
     <?php
     //var_dump($this->allTasks);
-    if (isset($this->allTasks['tasks'])): ?>
+    if (isset($this->allTasks['tasks']) && count($this->allTasks['tasks']) > 0): ?>
         <table>
             <thead>
                 <tr>
@@ -25,9 +25,10 @@
                 <?php endforeach; ?>
             </tbody>
         </table>
-        <a href="/createTask">Create Task</a>
+        <a href="/A_IT_ACADEMY_FULL_STACK_PHP/Sprint3__TODOLIST/web/createTask">Create Task</a>
     <?php else : ?>
         <p>No tasks available.</p>
     <?php endif; ?>
 </body>
 </html>
+

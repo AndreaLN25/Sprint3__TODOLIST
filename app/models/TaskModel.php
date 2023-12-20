@@ -8,18 +8,14 @@ class TaskModel extends Model{
         $this-> json = ROOT_PATH . '/db/dataBase.json';
     }
 
-    public function loadData():array {
+    /*public function loadData():array {
         $jsonContent = file_get_contents($this->json);
         //var_dump($jsonContent);
         $this->tasks = json_decode($jsonContent, true);
         //var_dump($this->tasks);
         return $this->tasks;
-    }
+    }*/
     
-    private function saveTasks($tasks){
-        $newJsonContent = json_encode($tasks, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
-        file_put_contents($this->json , $newJsonContent);
-    }
     
     public function getTasks(){
         $jsonContent = file_get_contents($this->json);
@@ -27,31 +23,45 @@ class TaskModel extends Model{
         return $tasks;
     }
 
-
-   /* public function getTasks(): array {
-        $jsonContent = file_get_contents($this->json);
-        
-        if ($jsonContent === false) {
-            echo "Error: No se pudo cargar el contenido del archivo JSON.";
-            return [];
-        }
-
-        $tasks = json_decode($jsonContent, true);
-
-        if (!isset($tasks)) {
-            echo "Error: No se encontró la clave 'tasks' en el archivo JSON.";
-            return [];
-        }
-
-        return $tasks;
-    }
-    */
     public function createTask($newTask){
+        var_dump($newTask);
         $tasks = $this->getTasks();
-        $tasks[] = $newTask;
+        if (!isset($tasks['tasks'])) {//sin esta linea se creaban arrays anidados
+            $tasks['tasks'] = array();}
+        //$tasks[] = $newTask; array simple, por eso no funcionaba en la vista cuando añadias una tarea nueva creada. 
+        $tasks['tasks'][] = $newTask;
         $this->saveTasks($tasks);
-       
     }
+
+    private function saveTasks($tasks){
+        $newJsonContent = json_encode($tasks, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+        file_put_contents($this->json , $newJsonContent);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
     
     /*
 
