@@ -13,14 +13,24 @@
                     <th>Task ID</th>
                     <th>Description</th>
                     <th>Status</th>
+                    <th>Creation Date</th>
+                    <th>Deadline </th>
+                    <th>User ID</th>
+                    <th>Priority</th>
+                    <th>Assigned to</th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($this->allTasks['tasks'] as $task) : ?>
                     <tr>
-                        <td><?php echo $task['task_id']; ?></td>
-                        <td><?php echo $task['task_description']; ?></td>
-                        <td><?php echo $task['task_status']; ?></td>
+                        <td><?php echo isset($task['task_id']) ? $task['task_id'] : ''; ?></td>
+                        <td><?php echo isset($task['task_description']) ? $task['task_description'] : ''; ?></td>
+                        <td><?php echo isset($task['task_status']) ? $task['task_status'] : ''; ?></td>
+                        <td><?php echo isset($task['task_creation_date']) ? $task['task_creation_date'] : ''; ?></td>
+                        <td><?php echo isset($task['task_deadline']) ? $task['task_deadline'] : ''; ?></td>
+                        <td><?php echo isset($task['id_user']) ? $task['id_user'] : ''; ?></td>
+                        <td><?php echo isset($task['task_priority']) ? $task['task_priority'] : ''; ?></td> 
+                        <td><?php echo isset($task['task_assigned_to']) ? $task['task_assigned_to'] : ''; ?></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>

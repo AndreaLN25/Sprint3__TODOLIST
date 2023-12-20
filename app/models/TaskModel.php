@@ -25,6 +25,11 @@ class TaskModel extends Model{
 
     public function createTask($newTask){
         var_dump($newTask);
+
+        if (empty($newTask['task_creation_date'])) { //fecha creacion automatica
+            $newTask['task_creation_date'] = date("Y-m-d H:i:s");
+        }
+
         $tasks = $this->getTasks();
         if (!isset($tasks['tasks'])) {//sin esta linea se creaban arrays anidados
             $tasks['tasks'] = array();}
@@ -61,7 +66,7 @@ class TaskModel extends Model{
 
 
 
-    
+
     
     /*
 

@@ -45,20 +45,22 @@ class ApplicationController extends Controller
         var_dump($_POST);
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $newTask = array(
-                "task_id" => uniqid(),
-                "task_description" => isset($_POST["task_description"]) ? $_POST["task_description"] : "",
-                "task_status" => isset($_POST["task_status"]) ? $_POST["task_status"] : "pending",
-                "task_created_at" => date("Y-m-d H:i"),
-                "task_updated_at" => date("Y-m-d H:i"),
-                "task_deadline" => isset($_POST["task_deadline"]) ? $_POST["task_deadline"] : "",
-                "task_assigned_to" => isset($_POST["task_assigned_to"]) ? $_POST["task_assigned_to"] : "",
-                "task_created_by" => $_SESSION["user_id"] ,
-                "task_updated_by" => $_SESSION["user_id"] ,
-                "task_priority" => isset($_POST["task_priority"]) ? $_POST["task_priority"] : ""
-            );
+			if(isset($_SESSION["user_id"])){ //login 
+				$creationDate = isset($_POST['task_creation_date']) ? $_POST["task_creation_date"] : "";
+				$taskDeadline = date('Y-m-d', strtotime($creationDate . ' +1 month'));
+				$newTask = array(
+					"task_id" => uniqid(),
+					"task_description" => isset($_POST["task_description"]) ? $_POST["task_description"] : "",
+					"task_status" => isset($_POST["task_status"]) ? $_POST["task_status"] : "pending",
+					"task_creation_date" => date("Y-m-d H:i"),
+					"task_updated_at" => date("Y-m-d H:i"),
+					"task_deadline" => isset($_POST["task_deadline"]) ? $_POST["task_deadline"] : "",
+					"task_assigned_to" => isset($_POST["task_assigned_to"]) ? $_POST["task_assigned_to"] : "",
+					"task_created_by" => $_SESSION["user_id"] ,
+					"task_updated_by" => $_SESSION["user_id"] ,
+					"task_priority" => isset($_POST["task_priority"]) ? $_POST["task_priority"] : ""
+				);
             
-            if (isset($_SESSION["user_id"])) {
                 $taskModel = new TaskModel();
                 $taskModel->createTask($newTask);
 
@@ -66,9 +68,8 @@ class ApplicationController extends Controller
                 exit();
             } else {
                 echo "User session not found.";
-            }
+			}
         }
-        
         $this->view->render('createTask');
     }
 }

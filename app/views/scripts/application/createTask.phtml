@@ -16,14 +16,24 @@
             <option value="completed">Completed</option>
         </select><br><br>
 
-        <label for="task_deadline">Deadline:</label>
+        <label for="task_creation_date">Creation Date:</label>
+        <input type="date" id="task_creation_date" name="task_creation_date"><br><br>
+
+        <label for="task_deadline">Deadline (One month from Creation Date):</label>
         <input type="date" id="task_deadline" name="task_deadline"><br><br>
 
+        <label for="task_assigned_to">Assigned To:</label>
+        <input type="text" id="task_assigned_to" name="task_assigned_to"><br><br>
+
+        <label for="task_priority">Priority:</label>
+        <select id="task_priority"  name="task_priority"> 
+            <option value = 1> 1</option>
+            <option number = 2> 2</option>
+            <option number = 3> 3</option>
+        </select><br><br>
 
         <input type="submit" value="Create Task">
         <a href="/A_IT_ACADEMY_FULL_STACK_PHP/Sprint3__TODOLIST/web/getTasks">Go Back to Tasks</a>
     </form>
 </body>
 </html>
-
-
