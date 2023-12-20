@@ -37,7 +37,7 @@ class TaskManager{
     }
 }
 
-function createTaskList($taskManager){ //funcion crear lista de tareas
+function createTaskList($taskManager){ //funcion crear lista de tareas !!!!ESTO DEBERIA IR EN EL CONTROLADOR?¿?!!!!
     $taskManager->displayAvailableTasks();
     $listaTareas = $taskManager->selectTasksForList();
 
@@ -59,7 +59,7 @@ function createTaskList($taskManager){ //funcion crear lista de tareas
 }
 //funcion que guarda cada lista de tareas en un archivo nuevo json (esto se puede cambiar si genera problemas --de momento los json de lista de tareas se están guardando en la carpeta models, esto he de cambiarlo--)
 
-function saveTaskList($lista){
+function saveTaskList($lista){//!!!!ESTO DEBERIA IR EN EL CONTROLADOR?¿?!!!!
     $listaJson = json_encode($lista, JSON_PRETTY_PRINT); //codifica el array asociativo en JSON para poder almacenar la informacion
     $numeroLista = rand(1,1000);//numero random para cada archivo que se genere (puede ocurrir q se generen dos listas con el mismo numero y pete XD aunq la probabilidad es baja teniendo en cuenta que es hasta 1000)
     $nombreArchivoLista = "Lista$numeroLista.json";
