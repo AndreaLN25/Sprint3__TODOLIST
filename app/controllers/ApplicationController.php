@@ -43,8 +43,8 @@ class ApplicationController extends Controller
             $username = $_POST["username"];
             $password = $_POST["password"];
             $email = $_POST["email"];
-            $loginValidation=$loginAttempt->registerUser($username,$password,$email);
-            //var_dump($loginValidation);
+            $loginRegister=$loginAttempt->registerUser($username,$password,$email);
+            var_dump($loginRegister);
             $loginValidation=$loginAttempt->validateUser($username,$password);
             //var_dump($loginValidation);
             $verBaseDeDATOS= $loginAttempt->loadUserData();

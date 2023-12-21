@@ -1,6 +1,5 @@
 {
-    "usuarios":[
-           
+    "usuarios": [
         {
             "user_name": "ramiro",
             "id_user": 1,
@@ -18,10 +17,18 @@
             "id_user": 3,
             "password": 123,
             "email": "alen21@gmail.com"
+        },
+        {
+            "user_name": "sdf",
+            "password": "dsfgt",
+            "email": "juanhernandez941214@gmail.com",
+            "id_user": 4
+        },
+        {
+            "user_name": "fgchvjb",
+            "password": "gcfhvjb",
+            "email": "juanhernand14@gmail.com",
+            "id_user": 5
         }
-
     ]
 }
-              
-           
-      
