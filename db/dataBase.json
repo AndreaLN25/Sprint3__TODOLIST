@@ -47,6 +47,30 @@
             "task_created_by": 1,
             "task_updated_by": 1,
             "task_priority": ""
+        },
+        {
+            "task_id": "658406851b79a",
+            "task_description": "prueba3454",
+            "task_status": "completed",
+            "task_creation_date": "2023-12-21 10:33",
+            "task_updated_at": "2023-12-21 10:33",
+            "task_deadline": "",
+            "task_assigned_to": "a",
+            "task_created_by": 1,
+            "task_updated_by": 1,
+            "task_priority": "3"
+        },
+        {
+            "task_id": "65840698ad3ab",
+            "task_description": "",
+            "task_status": "pending",
+            "task_creation_date": "2023-12-21 10:34",
+            "task_updated_at": "2023-12-21 10:34",
+            "task_deadline": "",
+            "task_assigned_to": "",
+            "task_created_by": 1,
+            "task_updated_by": 1,
+            "task_priority": "1"
         }
     ]
 }

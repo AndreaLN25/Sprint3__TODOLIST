@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Tasks</title>
+</head>
+<body>
+    <form method="GET" action="/A_IT_ACADEMY_FULL_STACK_PHP/Sprint3__TODOLIST/web/getTaskById">
+        <label for="task_id">Search Task by ID:</label>
+        <input type="text" id="task_id" name="task_id">
+        <button type="submit">Search</button>
+    </form>
+
+    <?php 
+    //var_dump($this->allTasks['tasks']);
+    if (isset($this->allTasks['tasks']) && count($this->allTasks['tasks']) > 0): 
+        $requestedTaskId = $_GET['task_id'] ?? ''; // Obtener el task_id proporcionado por el usuario
+        
+        foreach ($this->allTasks['tasks'] as $task) {
+            if ($task['task_id'] === $requestedTaskId) { // Comprobar si el task_id coincide
+                ?>
+                <h2>Esta es tu tarea:</h2>
+                <p><strong>Task ID:</strong> <?php echo $task['task_id']; ?></p>
+                <p><strong>Description:</strong> <?php echo $task['task_description']; ?></p>
+                <p><strong>Status:</strong> <?php echo $task['task_status']; ?></p>
+                <p><strong>Creation Date:</strong> <?php echo $task['task_creation_date']; ?></p>
+                <p><strong>Deadline:</strong> <?php echo $task['task_deadline']; ?></p>
+                <p><strong>User ID:</strong> <?php echo $task['id_user']; ?></p>
+                <p><strong>Priority:</strong> <?php echo $task['task_priority']; ?></p>
+                <p><strong>Assigned to:</strong> <?php echo $task['task_assigned_to']; ?></p>
+                <?php
+                break; // Si se encuentra la tarea, se muestran sus detalles y se detiene el bucle
+            }
+        }
+    else:
+        ?>
+        <p>No tasks available.</p>
+    <?php endif; ?>
+</body>
+</html>

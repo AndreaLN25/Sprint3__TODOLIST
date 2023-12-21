@@ -45,6 +45,16 @@ class TaskModel extends Model{
 
 
 
+    public function getTaskById($taskId){
+        $tasks = $this->getTasks()['tasks'];
+        foreach($tasks as $task){
+            if($task['task_id'] == $taskId){
+                return $task;
+            }
+        } 
+        return "Task not found";
+    }
+
 
 
 
@@ -70,16 +80,6 @@ class TaskModel extends Model{
     
     /*
 
-
-    public function getTaskById($id){
-        $tasks = $this->getTasks();
-        foreach($tasks as $task){
-            if($task['id'] == $id){
-                return $task;
-            }
-        } 
-        return "Task not found";
-    }
 
 
     public function deleteTask($taskId){

@@ -72,4 +72,25 @@ class ApplicationController extends Controller
         }
         $this->view->render('createTask');
     }
+
+
+	public function getTaskByIdAction() {
+		if (isset($_GET['task_id'])) {
+			$taskId = $_GET['task_id'];
+	
+			$taskModel = new TaskModel();
+			$allTasks = $taskModel->getTasks(); // Obtener todas las tareas
+	
+			$taskByID = $taskModel->getTaskById($taskId);
+	
+			if ($taskByID !== "Task not found") {
+				$this->view->task = $taskByID;
+				$this->view->allTasks = $allTasks; // Asignar todas las tareas a la vista
+				$this->view->render('getTaskById');
+			} else {
+				echo "Task not found";
+			}
+		}
+	}
+	
 }
