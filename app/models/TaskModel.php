@@ -10,7 +10,17 @@ class TaskModel extends Model{
         $this-> json = ROOT_PATH . '/db/dataBase.json';
 
     }
-    public function createUser(){
+    public function registerUser($username,$password,$email){
+        $usersValidated= $this->validateUser($username,$password);
+        if($usersValidated == false){
+            $newUser=["user_name"=>$username,"password"=>$password,"email"=>$email,"id_user"=>4];
+            $jsonUsers=json_encode($newUser);
+            $this->users[]=$jsonUsers;
+            //var_dump($this->users);
+            return $jsonUsers;
+  
+        }
+
 
     }
 
@@ -19,7 +29,6 @@ class TaskModel extends Model{
         $jsonContent = file_get_contents($this->jsonUsers);
         //$this->users = json_decode($jsonContent, true);
         $users = json_decode($jsonContent, true);
-      
         return $users;
     }
 
@@ -30,19 +39,12 @@ class TaskModel extends Model{
         foreach($users["usuarios"] as $user){
             //var_dump($user);
             //print_r($user[2]["user_name"]);
-            if ($user["user_name"]== $username && $user["password"]== $password){
+            if ($user["user_name"] == $username && $user["password"]== $password){
                 echo $password;
                 return true; 
-              
             }
-        
         } 
-
-      
         return false;
-
-
-       
     }
 
 }

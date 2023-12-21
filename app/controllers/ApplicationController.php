@@ -16,7 +16,7 @@ class ApplicationController extends Controller
             $loginResult=$loginAttempt->validateUser($username,$password,);
             var_dump($loginResult);
             if($loginResult == true){
-                $this->view->mensaje = "Ha sido exitoso el registro de usuario";
+                $this->view->mensaje = "Bienvenido";
                 var_dump($username);
                 //$this->view->render(ROOT_PATH . '/app/views/scripts/login');
 
@@ -38,15 +38,25 @@ class ApplicationController extends Controller
 
     public function registerAction()
 	{
+        $loginAttempt=new TaskModel();
         if($_SERVER["REQUEST_METHOD"]=="POST"){
             $username = $_POST["username"];
             $password = $_POST["password"];
             $email = $_POST["email"];
-		   // Lógica del controlador
-           $this->view->mensaje = "Hola desde el controlador";
-        
-		   // Lógica del controlador
-           $this->view->mensaje = "Hola desde el controlador del registro";
+            $loginValidation=$loginAttempt->registerUser($username,$password,$email);
+            //var_dump($loginValidation);
+            $loginValidation=$loginAttempt->validateUser($username,$password);
+            //var_dump($loginValidation);
+            $verBaseDeDATOS= $loginAttempt->loadUserData();
+            var_dump($verBaseDeDATOS);
+            
+            if($loginValidation==true){
+                $this->view->mensaje = "Ha sido exitoso el registro de usuario";
+            }
+            else{
+                echo "error";
+            }
+
         }
 	}
 

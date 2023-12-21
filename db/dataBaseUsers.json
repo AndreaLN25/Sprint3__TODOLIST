@@ -9,13 +9,13 @@
         },
         {
             "user_name": "andrea",
-            "id_user": 1,
+            "id_user": 2,
             "password": 234,
             "email": "juan@gmail.com"
         },
         {
             "user_name": "norberto",
-            "id_user": 1,
+            "id_user": 3,
             "password": 123,
             "email": "alen21@gmail.com"
         }
