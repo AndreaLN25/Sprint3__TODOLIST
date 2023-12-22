@@ -19,8 +19,7 @@ class TaskModel extends Model{
     
     public function getTasks(){
         $jsonContent = file_get_contents($this->json);
-        $tasks = json_decode($jsonContent, true, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-        return $tasks;
+        return json_decode($jsonContent, true, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
     }
 
     public function createTask($newTask){
@@ -47,24 +46,15 @@ class TaskModel extends Model{
 
     public function getTaskById($taskId){
         $tasks = $this->getTasks()['tasks'];
+        //var_dump($tasks);
         foreach($tasks as $task){
+            //var_dump($tasks);
             if($task['task_id'] == $taskId){
                 return $task;
             }
         } 
         return "Task not found";
     }
-
-
-
-
-
-
-
-
-
-
-
 
 
 

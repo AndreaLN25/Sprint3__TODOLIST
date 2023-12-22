@@ -34,9 +34,9 @@ class ApplicationController extends Controller
         $allTasks = $taskModel->getTasks();
         //$this->view->allTasks = $dataJson->getTasks();
 		//var_dump($allTasks);
-		$this->view->allTasks = $allTasks; // Asignar las tareas a la vista
+		$this->view->allTasks = $allTasks; 
 
-        $this->view->render('scripts/application/getTasks'); // Renderizar la vista correspondiente
+        $this->view->render('scripts/application/getTasks'); 
     }
 
 
@@ -79,13 +79,13 @@ class ApplicationController extends Controller
 			$taskId = $_GET['task_id'];
 	
 			$taskModel = new TaskModel();
-			$allTasks = $taskModel->getTasks(); // Obtener todas las tareas
+			//$allTasks = $taskModel->getTasks(); 
 	
 			$taskByID = $taskModel->getTaskById($taskId);
 	
 			if ($taskByID !== "Task not found") {
-				$this->view->task = $taskByID;
-				$this->view->allTasks = $allTasks; // Asignar todas las tareas a la vista
+				$this->view->task = $taskByID; 
+				$this->view->allTasks= $taskModel->getTasks(); 
 				$this->view->render('getTaskById');
 			} else {
 				echo "Task not found";
