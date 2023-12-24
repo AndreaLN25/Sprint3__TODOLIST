@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Tasks</title>
+</head>
+<body>
+    <?php
+    //var_dump($this->allTasks);
+    if (isset($this->allTasks['tasks']) && count($this->allTasks['tasks']) > 0): ?>
+        <table>
+            <thead>
+                <tr>
+                    <th>Task ID</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                    <th>Creation Date</th>
+                    <th>Deadline </th>
+                    <th>User ID</th>
+                    <th>Priority</th>
+                    <th>Assigned to</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($this->allTasks['tasks'] as $task) : ?>
+                    <tr>
+                        <td><?php echo isset($task['task_id']) ? $task['task_id'] : ''; ?></td>
+                        <td><?php echo isset($task['task_description']) ? $task['task_description'] : ''; ?></td>
+                        <td><?php echo isset($task['task_status']) ? $task['task_status'] : ''; ?></td>
+                        <td><?php echo isset($task['task_creation_date']) ? $task['task_creation_date'] : ''; ?></td>
+                        <td><?php echo isset($task['task_deadline']) ? $task['task_deadline'] : ''; ?></td>
+                        <td><?php echo isset($task['id_user']) ? $task['id_user'] : ''; ?></td>
+                        <td><?php echo isset($task['task_priority']) ? $task['task_priority'] : ''; ?></td> 
+                        <td><?php echo isset($task['task_assigned_to']) ? $task['task_assigned_to'] : ''; ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+        <a href="/A_IT_ACADEMY_FULL_STACK_PHP/Sprint3__TODOLIST/web/createTask">Create Task</a>
+        <a href="/A_IT_ACADEMY_FULL_STACK_PHP/Sprint3__TODOLIST/web/getTaskById">Search Task By Id</a>
+    <?php else : ?>
+        <p>No tasks available.</p>
+    <?php endif; ?>
+</body>
+</html>
+

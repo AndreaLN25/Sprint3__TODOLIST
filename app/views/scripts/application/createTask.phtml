@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Task</title>
+</head>
+<body>
+    <h2>Create New Task</h2>
+    <form method="post" action="/A_IT_ACADEMY_FULL_STACK_PHP/Sprint3__TODOLIST/web/createTask">
+        <label for="task_description">Description:</label>
+        <input type="text" id="task_description" name="task_description"><br><br>
+
+        <label for="task_status">Status:</label>
+        <select id="task_status" name="task_status">
+            <option value="pending">Pending</option>
+            <option value="in_progress">In Progress</option>
+            <option value="completed">Completed</option>
+        </select><br><br>
+
+        <label for="task_creation_date">Creation Date:</label>
+        <input type="date" id="task_creation_date" name="task_creation_date"><br><br>
+
+        <label for="task_deadline">Deadline (One month from Creation Date):</label>
+        <input type="date" id="task_deadline" name="task_deadline"><br><br>
+
+        <label for="task_assigned_to">Assigned To -User_Id:</label> 
+        <input type="text" id="task_assigned_to" name="task_assigned_to"><br><br>
+
+        <label for="task_priority">Priority:</label>
+        <select id="task_priority"  name="task_priority"> 
+            <option value = 1> 1</option>
+            <option number = 2> 2</option>
+            <option number = 3> 3</option>
+        </select><br><br>
+
+        <input type="submit" value="Create Task">
+        <a href="/A_IT_ACADEMY_FULL_STACK_PHP/Sprint3__TODOLIST/web/getTasks">Go Back to Tasks</a>
+    </form>
+</body>
+</html>

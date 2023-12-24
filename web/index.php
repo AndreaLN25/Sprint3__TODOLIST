@@ -1,5 +1,8 @@
 <?php
 
+session_start();
+$_SESSION["user_id"] = 1; 
+
 error_reporting(E_ALL|E_STRICT);
 ini_set('display_errors', 1);
 date_default_timezone_set('CET');
