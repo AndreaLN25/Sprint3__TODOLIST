@@ -12,12 +12,13 @@
 $routes = array(
 
 	'/test' => 'test#index',
-	//'/'  =>'application#index',
+	'/' => 'application#index',
 	//'/' =>  'application#getTasks',
 	'/getTasks' => 'application#getTasks',
 	'/createTask' => 'application#createTask',
 	'/getTaskById' => 'application#getTaskById',
 	'/application' => 'application#login',
-	'/applicationRegister' => 'application#register'
+	'/applicationRegister' => 'application#register',
+	'/logout' => 'application#logout'
 
 );

@@ -7,8 +7,7 @@
 
  //require_once (ROOT_PATH . 'app\models\TaskModel.php');
 
-class ApplicationController extends Controller 
-{
+class ApplicationController extends Controller{
 
 	/*
 	public function indexAction()
@@ -38,7 +37,6 @@ class ApplicationController extends Controller
 
         $this->view->render('scripts/application/getTasks'); 
     }
-
 
 
 	public function createTaskAction() {
@@ -92,59 +90,148 @@ class ApplicationController extends Controller
 			}
 		}
 	}
-	public function loginAction()
+
+
+	/*public function loginAction()
 	{
         $loginAttempt=new TaskModel();
+		var_dump($_SESSION['user_id']);
+
+		$_SESSION['username'] = null;
 
         if($_SERVER["REQUEST_METHOD"]=="POST"){
             $username = $_POST["username"];
             $password = $_POST["password"];
+
             $loginResult=$loginAttempt->validateUser($username,$password,);
-            var_dump($loginResult);
+
+            //var_dump($loginResult);
             if($loginResult == true){
+				$authenticatedUser = $loginAttempt->getUserByUsername($username); // Aquí necesitas una función que busque al usuario por su nombre de usuario
+				var_dump($authenticatedUser);
+				$_SESSION['user_id'] = $authenticatedUser['id_user']; //dxfcgvbhjnkm,lkjhugyftchv bnjnbv
+				var_dump($authenticatedUser);
+				$_SESSION['username'] = $authenticatedUser['user_name'];
+				var_dump($authenticatedUser);
+
+				if ($authenticatedUser !== null && isset($authenticatedUser['user_name'])) {
+					$_SESSION['user_id'] = $authenticatedUser['id_user'];
+					$_SESSION['username'] = $authenticatedUser['user_name'];
+					header("Location: /A_IT_ACADEMY_FULL_STACK_PHP/Sprint3__TODOLIST/web/getTasks");
+					exit();
+				}
+
                 $this->view->mensaje = "Bienvenido";
-                var_dump($username);
-                //$this->view->render(ROOT_PATH . '/app/views/scripts/login');
+                //var_dump($username);
+                $this->view->render(ROOT_PATH . '/app/views/scripts/index');
 
                
             }
             else{
                 $this->view->mensaje = "Usuario no valido";
+				$this->view->render(ROOT_PATH . '/app/views/scripts/login');
                 //var_dump($username);
             }
         }
-		   // Lógica del controlador
-
-          // $this->view->render(ROOT_PATH . '/app/views/scripts/login');
-
-    }
+    }*/
      
-      
-	
+
+	public function loginAction()
+{
+    $loginAttempt = new TaskModel();
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $username = $_POST["username"];
+        $password = $_POST["password"];
+
+        $loginResult = $loginAttempt->validateUser($username, $password);
+
+        if ($loginResult == true) {
+            $authenticatedUser = $loginAttempt->getUserByUsername($username);
+
+            if ($authenticatedUser !== null && isset($authenticatedUser['user_name'])) {
+                $_SESSION['user_id'] = $authenticatedUser['id_user'];
+                $_SESSION['username'] = $authenticatedUser['user_name'];
+                header("Location: /A_IT_ACADEMY_FULL_STACK_PHP/Sprint3__TODOLIST/web/getTasks");
+                exit();
+            }
+        } else {
+            $this->view->mensaje = "Usuario no válido";
+            $this->view->render(ROOT_PATH . '/app/views/scripts/login');
+        }
+    } else {
+        // Si no es una solicitud POST, simplemente muestra el formulario de inicio de sesión
+        $this->view->render(ROOT_PATH . '/app/views/scripts/login');
+    }
+}
 
     public function registerAction()
 	{
         $loginAttempt=new TaskModel();
+
         if($_SERVER["REQUEST_METHOD"]=="POST"){
             $username = $_POST["username"];
             $password = $_POST["password"];
             $email = $_POST["email"];
-            $loginRegister=$loginAttempt->registerUser($username,$password,$email);
-            var_dump($loginRegister);
-            $loginValidation=$loginAttempt->validateUser($username,$password);
-            //var_dump($loginValidation);
+
+            $loginRegisterOK=$loginAttempt->registerUser($username,$password,$email);
+
+			if ($loginRegisterOK){
+				$loginValidation=$loginAttempt->validateUser($username,$password);
+
+				if ($loginValidation){
+					$this->view->mensaje = "Registro de usuario exitoso";
+					$this->view->render(ROOT_PATH . '/app/views/scripts/login');
+				}else{
+					$this->view->mensaje = "Error en la validación después del registro";
+					$this->view->render(ROOT_PATH . '/app/views/scripts/register');
+				}
+
+
+			}else{
+				$this->view->mensaje = "Error en el registro de usuario";
+				$this->view->render(ROOT_PATH . '/app/views/scripts/register');
+			}
+		}else{
+			$this->view->render(ROOT_PATH . '/app/views/scripts/register');
+		}
             $verBaseDeDATOS= $loginAttempt->loadUserData();
-            var_dump($verBaseDeDATOS);
-            
-            if($loginValidation==true){
-                $this->view->mensaje = "Ha sido exitoso el registro de usuario";
-            }
-            else{
-                echo "error";
-            }
-
-        }
+            //var_dump($verBaseDeDATOS);
 	}
+	/*public function logout() {
+		session_start();
+	
+		if(isset($_GET['logout'])) {
+			session_destroy();
+			header("Location: /A_IT_ACADEMY_FULL_STACK_PHP/Sprint3__TODOLIST/web/");
+			exit;
+		}
+    }
 
+	public function logout() {
+		session_start(); // Inicia la sesión si no se ha iniciado
+	
+		// Destruye todas las variables de sesión
+		$_SESSION = array();
+	
+		// Si se desea matar la sesión, también se debe eliminar la cookie de sesión
+		if (isset($_COOKIE[session_name()])) {
+			setcookie(session_name(), '', time()-42000, '/');
+		}
+	
+		// Finalmente, destruye la sesión
+		session_destroy();
+	
+		// Redirige al usuario a la página de inicio de sesión o a donde desees
+		header("Location: /A_IT_ACADEMY_FULL_STACK_PHP/Sprint3__TODOLIST/web/");
+		exit();
+	}*/
+	public function logout() {
+		session_start();
+		session_destroy();
+		header("Location: /A_IT_ACADEMY_FULL_STACK_PHP/Sprint3__TODOLIST/web/");
+		exit;
+	}
+	
 }
 ?>

@@ -48,7 +48,6 @@ class TaskModel extends Model{
     }
 
 
-
     public function getTaskById($taskId){
         $tasks = $this->getTasks()['tasks'];
         //var_dump($tasks);
@@ -92,8 +91,6 @@ class TaskModel extends Model{
             return $jsonUsers;*/
   
         }
-
-
     }
 
     private function saveUsers($users){
@@ -102,6 +99,7 @@ class TaskModel extends Model{
     }
 
     public function loadUserData():array {
+        //var_dump($_SESSION['user_id']);
         //$newUser=[];
         $jsonContent = file_get_contents($this->jsonUsers);
         //$this->users = json_decode($jsonContent, true);
@@ -110,9 +108,8 @@ class TaskModel extends Model{
     }
 
     public function validateUser($username,$password,array $users= null){
-      if($users==null){
         $users =  $this->loadUserData();
-      }
+      
         foreach($users["usuarios"] as $user){
             //var_dump($user);
             //print_r($user[2]["user_name"]);
@@ -124,7 +121,18 @@ class TaskModel extends Model{
         return false;
     }
 
+    public function getUserByUsername($username) {
+        $users = $this->loadUserData();
+        //var_dump($users);
 
+        foreach ($users['usuarios'] as $user) {
+            if ($user['user_name'] === $username) {
+                return $user; // Devuelve la información del usuario si se encuentra el nombre de usuario
+            }
+        }
+
+        return null; // Devuelve null si no se encuentra el usuario
+    }
 
 
 
