@@ -5,11 +5,12 @@
  * Add general things in this controller.
  */
 
- //require_once (ROOT_PATH . 'app\models\TaskModel.php');
+//require_once (ROOT_PATH . 'app\models\TaskModel.php');
 
-class ApplicationController extends Controller{
+class ApplicationController extends Controller
+{
 
-	/*
+    /*
 	public function indexAction()
 	{
 		$this->view->message = "hello from test::index";
@@ -28,37 +29,39 @@ class ApplicationController extends Controller{
 		//require_once "views/layouts/layout.phtml";
 	}*/
 
-	public function getTasksAction(){  
-		$taskModel = new TaskModel();
+    public function getTasksAction()
+    {
+        $taskModel = new TaskModel();
         $allTasks = $taskModel->getTasks();
         //$this->view->allTasks = $dataJson->getTasks();
-		//var_dump($allTasks);
-		$this->view->allTasks = $allTasks; 
+        //var_dump($allTasks);
+        $this->view->allTasks = $allTasks;
 
-        $this->view->render('scripts/application/getTasks'); 
+        $this->view->render('scripts/application/getTasks');
     }
 
 
-	public function createTaskAction() {
+    public function createTaskAction()
+    {
         var_dump($_POST);
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-			if(isset($_SESSION["user_id"])){ //login 
-				$creationDate = isset($_POST['task_creation_date']) ? $_POST["task_creation_date"] : "";
-				$taskDeadline = date('Y-m-d', strtotime($creationDate . ' +1 month'));
-				$newTask = array(
-					"task_id" => uniqid(),
-					"task_description" => isset($_POST["task_description"]) ? $_POST["task_description"] : "",
-					"task_status" => isset($_POST["task_status"]) ? $_POST["task_status"] : "pending",
-					"task_creation_date" => date("Y-m-d H:i"),
-					"task_updated_at" => date("Y-m-d H:i"),
-					"task_deadline" => isset($_POST["task_deadline"]) ? $_POST["task_deadline"] : "",
-					"task_assigned_to" => isset($_POST["task_assigned_to"]) ? $_POST["task_assigned_to"] : "",
-					"task_created_by" => $_SESSION["user_id"] ,
-					"task_updated_by" => $_SESSION["user_id"] ,
-					"task_priority" => isset($_POST["task_priority"]) ? $_POST["task_priority"] : ""
-				);
-            
+            if (isset($_SESSION["user_id"])) { //login 
+                $creationDate = isset($_POST['task_creation_date']) ? $_POST["task_creation_date"] : "";
+                $taskDeadline = date('Y-m-d', strtotime($creationDate . ' +1 month'));
+                $newTask = array(
+                    "task_id" => uniqid(),
+                    "task_description" => isset($_POST["task_description"]) ? $_POST["task_description"] : "",
+                    "task_status" => isset($_POST["task_status"]) ? $_POST["task_status"] : "pending",
+                    "task_creation_date" => date("Y-m-d H:i"),
+                    "task_updated_at" => date("Y-m-d H:i"),
+                    "task_deadline" => isset($_POST["task_deadline"]) ? $_POST["task_deadline"] : "",
+                    "task_assigned_to" => isset($_POST["task_assigned_to"]) ? $_POST["task_assigned_to"] : "",
+                    "task_created_by" => $_SESSION["user_id"],
+                    "task_updated_by" => $_SESSION["user_id"],
+                    "task_priority" => isset($_POST["task_priority"]) ? $_POST["task_priority"] : ""
+                );
+
                 $taskModel = new TaskModel();
                 $taskModel->createTask($newTask);
 
@@ -66,33 +69,44 @@ class ApplicationController extends Controller{
                 exit();
             } else {
                 echo "User session not found.";
-			}
+            }
         }
         $this->view->render('createTask');
     }
+    public function logoutAction()
+    {
+        session_start();
+        session_destroy();
+        header("Location: " . WEB_ROOT . "/test");
+        //header("Location: /A_IT_ACADEMY_FULL_STACK_PHP/Sprint3__TODOLIST/test/");
+        //header("Location: /web");
+
+        exit;
+    }
 
 
-	public function getTaskByIdAction() {
-		if (isset($_GET['task_id'])) {
-			$taskId = $_GET['task_id'];
-	
-			$taskModel = new TaskModel();
-			//$allTasks = $taskModel->getTasks(); 
-	
-			$taskByID = $taskModel->getTaskById($taskId);
-	
-			if ($taskByID !== "Task not found") {
-				$this->view->task = $taskByID; 
-				$this->view->allTasks= $taskModel->getTasks(); 
-				$this->view->render('getTaskById');
-			} else {
-				echo "Task not found";
-			}
-		}
-	}
+    public function getTaskByIdAction()
+    {
+        if (isset($_GET['task_id'])) {
+            $taskId = $_GET['task_id'];
+
+            $taskModel = new TaskModel();
+            //$allTasks = $taskModel->getTasks(); 
+
+            $taskByID = $taskModel->getTaskById($taskId);
+
+            if ($taskByID !== "Task not found") {
+                $this->view->task = $taskByID;
+                $this->view->allTasks = $taskModel->getTasks();
+                $this->view->render('getTaskById');
+            } else {
+                echo "Task not found";
+            }
+        }
+    }
 
 
-	/*public function loginAction()
+    /*public function loginAction()
 	{
         $loginAttempt=new TaskModel();
 		var_dump($_SESSION['user_id']);
@@ -134,71 +148,71 @@ class ApplicationController extends Controller{
             }
         }
     }*/
-     
 
-	public function loginAction()
-{
-    $loginAttempt = new TaskModel();
 
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $username = $_POST["username"];
-        $password = $_POST["password"];
+    public function loginAction()
+    {
+        $loginAttempt = new TaskModel();
 
-        $loginResult = $loginAttempt->validateUser($username, $password);
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $username = $_POST["username"];
+            $password = $_POST["password"];
 
-        if ($loginResult == true) {
-            $authenticatedUser = $loginAttempt->getUserByUsername($username);
+            $loginResult = $loginAttempt->validateUser($username, $password);
 
-            if ($authenticatedUser !== null && isset($authenticatedUser['user_name'])) {
-                $_SESSION['user_id'] = $authenticatedUser['id_user'];
-                $_SESSION['username'] = $authenticatedUser['user_name'];
-                header("Location: /A_IT_ACADEMY_FULL_STACK_PHP/Sprint3__TODOLIST/web/getTasks");
-                exit();
+            if ($loginResult == true) {
+                $authenticatedUser = $loginAttempt->getUserByUsername($username);
+
+                if ($authenticatedUser !== null && isset($authenticatedUser['user_name'])) {
+                    $_SESSION['user_id'] = $authenticatedUser['id_user'];
+                    $_SESSION['username'] = $authenticatedUser['user_name'];
+                    header("Location: " . WEB_ROOT . "/getTasks");
+                    //header("Location: /A_IT_ACADEMY_FULL_STACK_PHP/Sprint3__TODOLIST/web/getTasks");
+                    //$this->view->render(ROOT_PATH . '/app/views/scripts/getTasks');
+                    exit();
+                }
+            } else {
+                $this->view->mensaje = "Usuario no válido";
+                $this->view->render(ROOT_PATH . '/app/views/scripts/login');
             }
         } else {
-            $this->view->mensaje = "Usuario no válido";
+            // Si no es una solicitud POST, simplemente muestra el formulario de inicio de sesión
             $this->view->render(ROOT_PATH . '/app/views/scripts/login');
         }
-    } else {
-        // Si no es una solicitud POST, simplemente muestra el formulario de inicio de sesión
-        $this->view->render(ROOT_PATH . '/app/views/scripts/login');
     }
-}
 
     public function registerAction()
-	{
-        $loginAttempt=new TaskModel();
+    {
+        $loginAttempt = new TaskModel();
 
-        if($_SERVER["REQUEST_METHOD"]=="POST"){
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $username = $_POST["username"];
             $password = $_POST["password"];
             $email = $_POST["email"];
 
-            $loginRegisterOK=$loginAttempt->registerUser($username,$password,$email);
+            $loginRegisterOK = $loginAttempt->registerUser($username, $password, $email);
 
-			if ($loginRegisterOK){
-				$loginValidation=$loginAttempt->validateUser($username,$password);
+            if ($loginRegisterOK) {
+                $loginValidation = $loginAttempt->validateUser($username, $password);
 
-				if ($loginValidation){
-					$this->view->mensaje = "Registro de usuario exitoso";
-					$this->view->render(ROOT_PATH . '/app/views/scripts/login');
-				}else{
-					$this->view->mensaje = "Error en la validación después del registro";
-					$this->view->render(ROOT_PATH . '/app/views/scripts/register');
-				}
-
-
-			}else{
-				$this->view->mensaje = "Error en el registro de usuario";
-				$this->view->render(ROOT_PATH . '/app/views/scripts/register');
-			}
-		}else{
-			$this->view->render(ROOT_PATH . '/app/views/scripts/register');
-		}
-            $verBaseDeDATOS= $loginAttempt->loadUserData();
-            //var_dump($verBaseDeDATOS);
-	}
-	/*public function logout() {
+                if ($loginValidation) {
+                    $this->view->mensaje = "Registro de usuario exitoso";
+                    $this->view->render(ROOT_PATH . '/app/views/scripts/login');
+                } else {
+                    $this->view->mensaje = "Error en la validación después del registro";
+                    $this->view->render(ROOT_PATH . '/app/views/scripts/register');
+                }
+            } else {
+                $this->view->mensaje = "Error en el registro de usuario";
+                $this->view->render(ROOT_PATH . '/app/views/scripts/register');
+            }
+        } else {
+            $this->view->render(ROOT_PATH . '/app/views/scripts/register');
+        }
+        $verBaseDeDATOS = $loginAttempt->loadUserData();
+        //var_dump($verBaseDeDATOS);
+    }
+    /*public function logout() {
 		session_start();
 	
 		if(isset($_GET['logout'])) {
@@ -226,12 +240,4 @@ class ApplicationController extends Controller{
 		header("Location: /A_IT_ACADEMY_FULL_STACK_PHP/Sprint3__TODOLIST/web/");
 		exit();
 	}*/
-	public function logout() {
-		session_start();
-		session_destroy();
-		header("Location: /A_IT_ACADEMY_FULL_STACK_PHP/Sprint3__TODOLIST/web/");
-		exit;
-	}
-	
 }
-?>

@@ -21,8 +21,10 @@
             <a href="/A_IT_ACADEMY_FULL_STACK_PHP/Sprint3__TODOLIST/web/applicationRegister">Registro</a>
         <?php else: ?>
             <h1>Bienvenido, <?php echo isset($_SESSION['username']) ? $_SESSION['username'] : 'Usuario'; ?></h1>
-            <a href="/A_IT_ACADEMY_FULL_STACK_PHP/Sprint3__TODOLIST/web/getTasks">Ver tareas</a>
-            <a href="/A_IT_ACADEMY_FULL_STACK_PHP/Sprint3__TODOLIST/web/">Cerrar sesión</a> //falta comprobar que funcione el logout
+            <!--<a href="/A_IT_ACADEMY_FULL_STACK_PHP/Sprint3__TODOLIST/web/getTasks">Ver tareas</a>-->
+            <a href= "<?php echo WEB_ROOT; ?>/getTasks">ver tareas</a>
+            <!--<a href="/A_IT_ACADEMY_FULL_STACK_PHP/Sprint3__TODOLIST/web/">Cerrar sesión</a> //falta comprobar que funcione el logout-->
+            <a href= "<?php echo WEB_ROOT; ?>/logout">log out</a>
         <?php endif; ?>
     </div>
     <?php echo $this->mensaje; ?>
