@@ -41,5 +41,11 @@
             <button type="submit">Search</button>
         </form>
     <?php endif; ?>
+    <?php if (isset($task) && $task['task_id'] === $requestedTaskId): ?>
+        <form method="post" action="/A_IT_ACADEMY_FULL_STACK_PHP/Sprint3__TODOLIST/web/deleteTask">
+            <input type="hidden" name="task_id" value="<?php echo $task['task_id']; ?>">
+            <input type="submit" value="Delete Task">
+        </form>
+    <?php endif; ?>
 </body>
 </html>

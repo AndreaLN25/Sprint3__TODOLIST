@@ -61,6 +61,26 @@ class TaskModel extends Model{
     }
 
 
+    public function deleteTask($taskId){
+        $tasksArray = $this->getTasks()['tasks'];
+    
+        $taskToDelete = $this->getTaskById($taskId);
+    
+        if ($taskToDelete !== "Task not found") {
+            $taskIndex = array_search($taskToDelete, $tasksArray, true);
+            if ($taskIndex !== false) {
+                array_splice($tasksArray, $taskIndex, 1); 
+                $tasks['tasks'] = $tasksArray;
+                $this->saveTasks($tasks);
+                return "Task deleted"; 
+            }
+        }
+    
+        return "Task not found or deletion failed";
+    }
+    
+
+
     public function registerUser($username,$password,$email){
         $usersValidated= $this->validateUser($username,$password);
         if($usersValidated == false){
@@ -143,18 +163,23 @@ class TaskModel extends Model{
     
     /*
     public function deleteTask($taskId){
-        $tasks = $this->getTasks();
-        $taskIndex = $this->findTaskIndexById($taskId, $tasks);
-    
+    $tasks = $this->getTasks();
+    $tasksArray = $tasks['tasks'];
+
+    $taskToDelete = $this->getTaskById($taskId);
+
+    if ($taskToDelete !== "Task not found") {
+        $taskIndex = array_search($taskToDelete, $tasksArray, true);
         if ($taskIndex !== false) {
-            array_splice($tasks, $taskIndex, 1); 
+            array_splice($tasksArray, $taskIndex, 1); 
+            $tasks['tasks'] = $tasksArray;
             $this->saveTasks($tasks);
             return "Task deleted"; 
         }
-    
-        return "Task not found or deletion failed";
     }
-    
+
+    return "Task not found or deletion failed";
+}
     private function findTaskIndexById($taskId, $tasks){
         foreach($tasks as $index => $task){
             if($task['id'] == $taskId){

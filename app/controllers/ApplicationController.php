@@ -92,6 +92,26 @@ class ApplicationController extends Controller{
 	}
 
 
+	public function deleteTaskAction(){
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['task_id'])){
+			$taskId = $_POST['task_id'];
+
+			$taskModel = new TaskModel();
+			$result = $taskModel->deleteTask($taskId);
+
+			if ($result === "Task deleted")	{
+				header("Location: /A_IT_ACADEMY_FULL_STACK_PHP/Sprint3__TODOLIST/web/getTasks");
+				exit();
+			} else {
+				echo "Failed to delete task.";
+			}
+		} else {
+			echo "Invalid request to delete task.";
+		}
+	}
+
+
+
 	/*public function loginAction()
 	{
         $loginAttempt=new TaskModel();
@@ -136,8 +156,7 @@ class ApplicationController extends Controller{
     }*/
      
 
-	public function loginAction()
-{
+	public function loginAction(){
     $loginAttempt = new TaskModel();
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
