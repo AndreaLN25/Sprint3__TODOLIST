@@ -114,51 +114,6 @@ class ApplicationController extends Controller{
 	}
 
 
-
-	/*public function loginAction()
-	{
-        $loginAttempt=new TaskModel();
-		var_dump($_SESSION['user_id']);
-
-		$_SESSION['username'] = null;
-
-        if($_SERVER["REQUEST_METHOD"]=="POST"){
-            $username = $_POST["username"];
-            $password = $_POST["password"];
-
-            $loginResult=$loginAttempt->validateUser($username,$password,);
-
-            //var_dump($loginResult);
-            if($loginResult == true){
-				$authenticatedUser = $loginAttempt->getUserByUsername($username); // Aquí necesitas una función que busque al usuario por su nombre de usuario
-				var_dump($authenticatedUser);
-				$_SESSION['user_id'] = $authenticatedUser['id_user']; //dxfcgvbhjnkm,lkjhugyftchv bnjnbv
-				var_dump($authenticatedUser);
-				$_SESSION['username'] = $authenticatedUser['user_name'];
-				var_dump($authenticatedUser);
-
-				if ($authenticatedUser !== null && isset($authenticatedUser['user_name'])) {
-					$_SESSION['user_id'] = $authenticatedUser['id_user'];
-					$_SESSION['username'] = $authenticatedUser['user_name'];
-					header("Location: /A_IT_ACADEMY_FULL_STACK_PHP/Sprint3__TODOLIST/web/getTasks");
-					exit();
-				}
-
-                $this->view->mensaje = "Bienvenido";
-                //var_dump($username);
-                $this->view->render(ROOT_PATH . '/app/views/scripts/index');
-
-               
-            }
-            else{
-                $this->view->mensaje = "Usuario no valido";
-				$this->view->render(ROOT_PATH . '/app/views/scripts/login');
-                //var_dump($username);
-            }
-        }
-    }*/
-     
-
 	public function loginAction(){
     $loginAttempt = new TaskModel();
 
@@ -181,11 +136,11 @@ class ApplicationController extends Controller{
         } else {
             $this->view->mensaje = "Usuario no válido";
             /*$this->view->render(ROOT_PATH . '/app/views/scripts/login');*/
-			$this->view->render(WEB_ROOT . '/app/views/scripts/login');
+			//$this->view->render(WEB_ROOT . '/app/views/scripts/login');
         }
     } else {
         // Si no es una solicitud POST, simplemente muestra el formulario de inicio de sesión
-        $this->view->render(ROOT_PATH . '/app/views/scripts/login');
+        //$this->view->render(ROOT_PATH . '/app/views/scripts/login');Genera un doble vista. 
     }
 }
 
@@ -206,20 +161,20 @@ class ApplicationController extends Controller{
 				if ($loginValidation){
 					$this->view->mensaje = "Registro de usuario exitoso";
 					/*$this->view->render(ROOT_PATH . '/app/views/scripts/login');*/
-					$this->view->render(WEB_ROOT . '/app/views/scripts/login');
+					//$this->view->render(WEB_ROOT . '/app/views/scripts/login');Genera un doble vista. 
 				}else{
 					$this->view->mensaje = "Error en la validación después del registro";
 					/*$this->view->render(ROOT_PATH . '/app/views/scripts/register');*/
-					$this->view->render(WEB_ROOT . '/app/views/scripts/register');
+					//$this->view->render(WEB_ROOT . '/app/views/scripts/register');Genera un doble vista. 
 				}
 
 
 			}else{
 				$this->view->mensaje = "Error en el registro de usuario";
-				$this->view->render(ROOT_PATH . '/app/views/scripts/register');
+				//$this->view->render(ROOT_PATH . '/app/views/scripts/register');Genera un doble vista. 
 			}
 		}else{
-			$this->view->render(ROOT_PATH . '/app/views/scripts/register');
+			//$this->view->render('application/register.phtml');Genera un doble vista.
 		}
             $verBaseDeDATOS= $loginAttempt->loadUserData();
             //var_dump($verBaseDeDATOS);
@@ -252,11 +207,11 @@ class ApplicationController extends Controller{
 		header("Location: /A_IT_ACADEMY_FULL_STACK_PHP/Sprint3__TODOLIST/web/");
 		exit();
 	}*/
-	public function logout() {
+	public function logoutAction() {
 		session_start();
 		session_destroy();
 		/*header("Location: /A_IT_ACADEMY_FULL_STACK_PHP/Sprint3__TODOLIST/web/");*/
-		header("Location: " . WEB_ROOT);
+		header("Location: " . WEB_ROOT."/test");
 		exit;
 	}
 	

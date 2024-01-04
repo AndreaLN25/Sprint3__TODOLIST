@@ -11,18 +11,18 @@
         <?php //var_dump($_SESSION['username']);
         if(!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])): ?>
             <h1>Sistema de Login</h1>
-            <form action="<?= WEB_ROOT ?>" method="post">
+            <form action="" method="post"> 
                 <label for="username">Usuario</label>
                 <input type="text" name="username" placeholder="Usuario" id="username" required>
                 <label for="password">Contraseña</label>
                 <input type="password" name="password" placeholder="Contraseña" id="password" required>
                 <input type="submit" value="Acceder">
             </form>
-            <a href="<?= WEB_ROOT ?>/applicationRegister">Registro</a>
+            <a href="<?= WEB_ROOT; ?>/applicationRegister">Registro</a>
         <?php else: ?>
             <h1>Bienvenido, <?php echo isset($_SESSION['username']) ? $_SESSION['username'] : 'Usuario'; ?></h1>
-            <a href="<?= WEB_ROOT ?>/getTasks">Ver tareas</a>
-            <a href="<?= WEB_ROOT ?>/">Cerrar sesión</a> //falta comprobar que funcione el logout
+            <a href="<?php echo WEB_ROOT; ?>/getTasks">Ver tareas</a>
+            <a href="<?php echo WEB_ROOT; ?>/logout">log out</a> //falta comprobar que funcione el logout
         <?php endif; ?>
     </div>
     <?php echo $this->mensaje; ?>
