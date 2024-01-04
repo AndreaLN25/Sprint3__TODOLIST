@@ -175,10 +175,10 @@ class ApplicationController extends Controller
                 $this->view->mensaje = "Usuario no válido";
                 $this->view->render(ROOT_PATH . '/app/views/scripts/login');
             }
-        } else {
+        } //else {
             // Si no es una solicitud POST, simplemente muestra el formulario de inicio de sesión
-            $this->view->render(ROOT_PATH . '/app/views/scripts/login');
-        }
+            //$this->view->render('login.phtml');
+       // }
     }
 
     public function registerAction()
@@ -197,18 +197,18 @@ class ApplicationController extends Controller
 
                 if ($loginValidation) {
                     $this->view->mensaje = "Registro de usuario exitoso";
-                    $this->view->render(ROOT_PATH . '/app/views/scripts/login');
+                    //$this->view->render(ROOT_PATH . '/app/views/scripts/login'); Genera un doble vista. 
                 } else {
                     $this->view->mensaje = "Error en la validación después del registro";
-                    $this->view->render(ROOT_PATH . '/app/views/scripts/register');
+                    //$this->view->render(ROOT_PATH . '/app/views/scripts/register');Genera un doble vista. 
                 }
             } else {
                 $this->view->mensaje = "Error en el registro de usuario";
-                $this->view->render(ROOT_PATH . '/app/views/scripts/register');
+                //$this->view->render(ROOT_PATH . '/app/views/scripts/register');Genera un doble vista. 
             }
-        } else {
-            $this->view->render(ROOT_PATH . '/app/views/scripts/register');
-        }
+        } //else {
+            //$this->view->render(ROOT_PATH . '/app/views/scripts/register');Genera un doble vista. 
+        //}
         $verBaseDeDATOS = $loginAttempt->loadUserData();
         //var_dump($verBaseDeDATOS);
     }
