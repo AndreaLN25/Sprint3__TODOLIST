@@ -5,7 +5,7 @@
 </head>
 <body>
     <h2>Create New Task</h2>
-    <form method="post" action="/A_IT_ACADEMY_FULL_STACK_PHP/Sprint3__TODOLIST/web/createTask">
+    <form method="post" action="<?= WEB_ROOT ?>/createTask">
         <label for="task_description">Description:</label>
         <input type="text" id="task_description" name="task_description"><br><br>
 
@@ -33,7 +33,7 @@
         </select><br><br>
 
         <input type="submit" value="Create Task">
-        <a href="/A_IT_ACADEMY_FULL_STACK_PHP/Sprint3__TODOLIST/web/getTasks">Go Back to Tasks</a>
+        <a href="<?= WEB_ROOT ?>/getTasks">Go Back to Tasks</a>
     </form>
 </body>
 </html>
