@@ -35,7 +35,8 @@ class ApplicationController extends Controller{
 		//var_dump($allTasks);
 		$this->view->allTasks = $allTasks; 
 
-        $this->view->render('scripts/application/getTasks'); 
+        /*$this->view->render('scripts/application/getTasks');*/
+		$this->view->render(WEB_ROOT . '/scripts/application/getTasks'); 
     }
 
 
@@ -62,7 +63,8 @@ class ApplicationController extends Controller{
                 $taskModel = new TaskModel();
                 $taskModel->createTask($newTask);
 
-                header("Location: /A_IT_ACADEMY_FULL_STACK_PHP/Sprint3__TODOLIST/web/getTasks");
+                /*header("Location: /A_IT_ACADEMY_FULL_STACK_PHP/Sprint3__TODOLIST/web/getTasks");*/
+				header("Location: " . WEB_ROOT . "/getTasks");
                 exit();
             } else {
                 echo "User session not found.";
@@ -100,7 +102,8 @@ class ApplicationController extends Controller{
 			$result = $taskModel->deleteTask($taskId);
 
 			if ($result === "Task deleted")	{
-				header("Location: /A_IT_ACADEMY_FULL_STACK_PHP/Sprint3__TODOLIST/web/getTasks");
+				/*header("Location: /A_IT_ACADEMY_FULL_STACK_PHP/Sprint3__TODOLIST/web/getTasks");*/
+				header("Location: " . WEB_ROOT . "/getTasks");
 				exit();
 			} else {
 				echo "Failed to delete task.";
@@ -171,12 +174,14 @@ class ApplicationController extends Controller{
             if ($authenticatedUser !== null && isset($authenticatedUser['user_name'])) {
                 $_SESSION['user_id'] = $authenticatedUser['id_user'];
                 $_SESSION['username'] = $authenticatedUser['user_name'];
-                header("Location: /A_IT_ACADEMY_FULL_STACK_PHP/Sprint3__TODOLIST/web/getTasks");
+                /*header("Location: /A_IT_ACADEMY_FULL_STACK_PHP/Sprint3__TODOLIST/web/getTasks");*/
+				header("Location: " . WEB_ROOT . "/getTasks");
                 exit();
             }
         } else {
             $this->view->mensaje = "Usuario no válido";
-            $this->view->render(ROOT_PATH . '/app/views/scripts/login');
+            /*$this->view->render(ROOT_PATH . '/app/views/scripts/login');*/
+			$this->view->render(WEB_ROOT . '/app/views/scripts/login');
         }
     } else {
         // Si no es una solicitud POST, simplemente muestra el formulario de inicio de sesión
@@ -200,10 +205,12 @@ class ApplicationController extends Controller{
 
 				if ($loginValidation){
 					$this->view->mensaje = "Registro de usuario exitoso";
-					$this->view->render(ROOT_PATH . '/app/views/scripts/login');
+					/*$this->view->render(ROOT_PATH . '/app/views/scripts/login');*/
+					$this->view->render(WEB_ROOT . '/app/views/scripts/login');
 				}else{
 					$this->view->mensaje = "Error en la validación después del registro";
-					$this->view->render(ROOT_PATH . '/app/views/scripts/register');
+					/*$this->view->render(ROOT_PATH . '/app/views/scripts/register');*/
+					$this->view->render(WEB_ROOT . '/app/views/scripts/register');
 				}
 
 
@@ -248,7 +255,8 @@ class ApplicationController extends Controller{
 	public function logout() {
 		session_start();
 		session_destroy();
-		header("Location: /A_IT_ACADEMY_FULL_STACK_PHP/Sprint3__TODOLIST/web/");
+		/*header("Location: /A_IT_ACADEMY_FULL_STACK_PHP/Sprint3__TODOLIST/web/");*/
+		header("Location: " . WEB_ROOT);
 		exit;
 	}
 	
