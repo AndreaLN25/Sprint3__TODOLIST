@@ -36,7 +36,7 @@ class ApplicationController extends Controller{
 		$this->view->allTasks = $allTasks; 
 
         /*$this->view->render('scripts/application/getTasks');*/
-		$this->view->render(WEB_ROOT . '/scripts/application/getTasks'); 
+		//$this->view->render('application/getTasks.phtml'); duplica la vista 
     }
 
 
@@ -54,7 +54,7 @@ class ApplicationController extends Controller{
 					"task_creation_date" => date("Y-m-d H:i"),
 					"task_updated_at" => date("Y-m-d H:i"),
 					"task_deadline" => isset($_POST["task_deadline"]) ? $_POST["task_deadline"] : "",
-					"task_assigned_to" => isset($_POST["task_assigned_to"]) ? $_POST["task_assigned_to"] : "",
+					"task_assigned_to" => isset($_POST["task_assigned_to"]) ? intval($_POST["task_assigned_to"]) :0,//onvierte el valor de $_POST["task_assigned_to"] a un entero utilizando la función intval. 
 					"task_created_by" => $_SESSION["user_id"] ,
 					"task_updated_by" => $_SESSION["user_id"] ,
 					"task_priority" => isset($_POST["task_priority"]) ? $_POST["task_priority"] : ""
@@ -70,7 +70,7 @@ class ApplicationController extends Controller{
                 echo "User session not found.";
 			}
         }
-        $this->view->render('createTask');
+       // $this->view->render('createTask');
     }
 
 
@@ -86,7 +86,7 @@ class ApplicationController extends Controller{
 			if ($taskByID !== "Task not found") {
 				$this->view->task = $taskByID; 
 				$this->view->allTasks= $taskModel->getTasks(); 
-				$this->view->render('getTaskById');
+				//$this->view->render('application/getTaskById.phtml');
 			} else {
 				echo "Task not found";
 			}
@@ -157,9 +157,11 @@ class ApplicationController extends Controller{
 
 			if ($loginRegisterOK){
 				$loginValidation=$loginAttempt->validateUser($username,$password);
+				var_dump($loginValidation);
 
 				if ($loginValidation){
 					$this->view->mensaje = "Registro de usuario exitoso";
+					header("Location: " . WEB_ROOT . "/getTasks");
 					/*$this->view->render(ROOT_PATH . '/app/views/scripts/login');*/
 					//$this->view->render(WEB_ROOT . '/app/views/scripts/login');Genera un doble vista. 
 				}else{

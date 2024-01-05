@@ -22,7 +22,6 @@
         <?php else: ?>
             <h1>Bienvenido, <?php echo isset($_SESSION['username']) ? $_SESSION['username'] : 'Usuario'; ?></h1>
             <a href="<?php echo WEB_ROOT; ?>/getTasks">Ver tareas</a>
-            <a href="<?php echo WEB_ROOT; ?>/logout">log out</a> //falta comprobar que funcione el logout
         <?php endif; ?>
     </div>
     <?php echo $this->mensaje; ?>
