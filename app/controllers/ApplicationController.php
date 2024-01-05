@@ -112,7 +112,31 @@ class ApplicationController extends Controller{
 			echo "Invalid request to delete task.";
 		}
 	}
+	public function editTaskAction(){
 
+        //selecionar la task a editar 
+        //ingresar nuevo valore y reemplazar lo ya existentes 
+        //confirmar que los cambias han sucedido 
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['task_id'])){
+	
+			if (isset($_GET['task_id'])) {
+				$taskId = $_GET['task_id'];
+				$taskModel = new TaskModel();
+				//$allTasks = $taskModel->getTasks(); 
+				$taskData = $taskModel->getTaskById($taskId);
+				if ($taskData !== "Task not found") {
+					$this->view->taskData = $taskData;
+					$this->view->render('application/editTask'); // Nombre de tu vista de edición
+				} else {
+					echo "Task not found";
+				}
+			}
+		}
+	
+       
+    }
+
+	
 
 	public function loginAction(){
     $loginAttempt = new TaskModel();

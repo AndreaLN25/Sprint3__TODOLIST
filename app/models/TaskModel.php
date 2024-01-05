@@ -47,6 +47,17 @@ class TaskModel extends Model{
         file_put_contents($this->json , $newJsonContent);
     }
 
+    public function updateTask($taskUpdate,$taskid){
+       $oldTasks = $this->getTasks();
+       $idToUpdate = array_search($taskid, array_column($oldTasks['task'], 'task_id'));
+
+          
+    
+    
+        
+
+    }
+
 
     public function getTaskById($taskId){
         $tasks = $this->getTasks()['tasks'];

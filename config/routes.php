@@ -20,6 +20,8 @@ $routes = array(
 	'/deleteTask' => 'application#deleteTask',
 	'/application' => 'application#login',
 	'/applicationRegister' => 'application#register',
-	'/logout' => 'application#logout'
+	'/logout' => 'application#logout',
+	'/editTask' => 'application#editTask'
+
 
 );
