@@ -21,7 +21,8 @@ $routes = array(
 	'/application' => 'application#login',
 	'/applicationRegister' => 'application#register',
 	'/logout' => 'application#logout',
-	'/editTask' => 'application#editTask'
+	'/editTask' => 'application#editTask',
+	'/updateTask' => 'application#updateTask'
 
 
 );

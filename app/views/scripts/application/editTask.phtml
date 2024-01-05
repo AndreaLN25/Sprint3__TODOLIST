@@ -1,29 +1,29 @@
-<form action="/saveEdit" method="post">
+<form method="post" action="<?= WEB_ROOT ?>/updateTask">
         <label for="task_id">ID de Tarea:</label>
-        <input type="text" id="task_id" name="task_id" value="<?php echo $datos['task_id']; ?>" readonly>
+        <input type="text" id="task_id" name="task_id" value="<?php echo $this->taskData['task_id']; ?>" readonly>
         <label for="task_description">Description:</label>
-        <input type="text" name="task_description" value="<?php echo $datos['task_description']; ?>">
+        <input type="text" name="task_description" value="<?php echo $this->taskData['task_description']; ?>">
         <label for="task_status">Status:</label>
         <select id="task_status" name="task_status">
-            <option value="pending" <?php echo ($datos['task_status'] == 'pending') ? 'selected' : ''; ?>>Pending</option>
-            <option value="in_progress" <?php echo ($datos['task_status'] == 'in_progress') ? 'selected' : ''; ?>> In Progress</option>
-            <option value="completed" <?php echo ($datos['task_status'] == 'completed') ? 'selected' : ''; ?>>Completed</option>
+            <option value="pending" <?php echo ($this->taskData['task_status'] == 'pending') ? 'selected' : ''; ?>>Pending</option>
+            <option value="in_progress" <?php echo ($this->taskData['task_status'] == 'in_progress') ? 'selected' : ''; ?>> In Progress</option>
+            <option value="completed" <?php echo ($this->taskData['task_status'] == 'completed') ? 'selected' : ''; ?>>Completed</option>
         </select><br><br>
 
         <label for="task_creation_date">Creation Date:</label>
-        <input type="date" id="task_creation_date" name="task_creation_date" value=<?php echo $datos['task_creation_date']; ?>><br><br>
+        <input type="date" id="task_creation_date" name="task_creation_date" value=<?php echo $this->taskData['task_creation_date']; ?>><br><br>
 
         <label for="task_deadline">Deadline (One month from Creation Date):</label>
-        <input type="date" id="task_deadline" name="task_deadline" value=<?php echo $datos['task_deadline']; ?>><br><br>
+        <input type="date" id="task_deadline" name="task_deadline" value=<?php echo $this->taskData['task_deadline']; ?>><br><br>
 
         <label for="task_assigned_to">Assigned To -User_Id:</label>
-        <input type="text" id="task_assigned_to" name="task_assigned_to" value=<?php echo $datos['task_assigned_to']; ?>><br><br>
+        <input type="text" id="task_assigned_to" name="task_assigned_to" value=<?php echo $this->taskData['task_assigned_to']; ?>><br><br>
 
         <label for="task_priority">Priority:</label>
         <select id="task_priority" name="task_priority">
-            <option value=<?php echo ($datos['task_priority'] == 1) ? 'selected' : ''; ?>> 1</option>
-            <option value=<?php echo ($datos['task_priority'] == 1) ? 'selected' : ''; ?>> 2</option>
-            <option value=<?php echo ($datos['task_priority'] == 1) ? 'selected' : ''; ?>> 3</option>
+            <option value=<?php echo ($this->taskData['task_priority'] == 1) ? 'selected' : ''; ?>> 1</option>
+            <option value=<?php echo ($this->taskData['task_priority'] == 1) ? 'selected' : ''; ?>> 2</option>
+            <option value=<?php echo ($this->taskData['task_priority'] == 1) ? 'selected' : ''; ?>> 3</option>
 
         </select><br><br>
 

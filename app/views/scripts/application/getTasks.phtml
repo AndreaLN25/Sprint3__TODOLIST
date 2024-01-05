@@ -34,7 +34,7 @@
                         <td><?php echo isset($task['task_priority']) ? $task['task_priority'] : ''; ?></td>
                         <td><?php echo isset($task['task_assigned_to']) ? $task['task_assigned_to'] : ''; ?></td>
                         <td>
-                            <form method="post" action="editTask">
+                            <form method="post" action="<?= WEB_ROOT ?>/editTask">
                                 <!-- Campo oculto para almacenar el ID de la tarea -->
                                 <input type="hidden" name="task_id" value="<?php echo $task['task_id']; ?>">
                                 <!-- Botón "Editar" -->

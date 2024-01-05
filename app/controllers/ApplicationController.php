@@ -112,6 +112,8 @@ class ApplicationController extends Controller{
 			echo "Invalid request to delete task.";
 		}
 	}
+	
+	
 	public function editTaskAction(){
 
         //selecionar la task a editar 
@@ -119,14 +121,16 @@ class ApplicationController extends Controller{
         //confirmar que los cambias han sucedido 
 		if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['task_id'])){
 	
-			if (isset($_GET['task_id'])) {
-				$taskId = $_GET['task_id'];
+			if (isset($_POST['task_id'])) {
+				$taskId = $_POST['task_id'];
 				$taskModel = new TaskModel();
 				//$allTasks = $taskModel->getTasks(); 
 				$taskData = $taskModel->getTaskById($taskId);
+				var_dump($taskData);
+				//$taskModel->updateTask($taskData,$taskId);
 				if ($taskData !== "Task not found") {
 					$this->view->taskData = $taskData;
-					$this->view->render('application/editTask'); // Nombre de tu vista de edición
+					//$this->view->render('application/editTask.phtml'); // Nombre de tu vista de edición
 				} else {
 					echo "Task not found";
 				}
@@ -135,6 +139,36 @@ class ApplicationController extends Controller{
 	
        
     }
+
+	public function updateTaskAction(){
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['task_id'])){
+			$taskId = $_POST['task_id'];
+			$updatedTaskData = [
+				'task_id'=> $_POST['task_id'],
+				'task_description' => $_POST['task_description'],
+				'task_status' => $_POST['task_status'],
+				'task_creation_date' => $_POST['task_creation_date'],
+				'task_deadline' => $_POST['task_deadline'],
+				'task_assigned_to' => $_POST['task_assigned_to'],
+				'task_priority' => $_POST['task_priority'],
+				// Agrega otros campos si es necesario
+			];
+				$taskModel = new TaskModel();
+				$taskModel->getTaskById($taskId);
+				$newTask=$taskModel->updateTask($updatedTaskData,$taskId);
+				
+				if($newTask===true){
+					echo "yeiii";
+					header("Location: " . WEB_ROOT . "/getTasks");
+				}
+				elseif($newTask===false){
+					echo "buuu";
+				}
+				
+
+		}
+
+	}
 
 	
 

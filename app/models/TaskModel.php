@@ -12,15 +12,6 @@ class TaskModel extends Model{
         $this-> jsonUsers = ROOT_PATH . '/db/dataBaseUsers.json';
 
     }
-
-    /*public function loadData():array {
-        $jsonContent = file_get_contents($this->json);
-        //var_dump($jsonContent);
-        $this->tasks = json_decode($jsonContent, true);
-        //var_dump($this->tasks);
-        return $this->tasks;
-    }*/
-    
     
     public function getTasks(){
         $jsonContent = file_get_contents($this->json);
@@ -47,14 +38,18 @@ class TaskModel extends Model{
         file_put_contents($this->json , $newJsonContent);
     }
 
-    public function updateTask($taskUpdate,$taskid){
-       $oldTasks = $this->getTasks();
-       $idToUpdate = array_search($taskid, array_column($oldTasks['task'], 'task_id'));
-
-          
-    
-    
-        
+    public function updateTask($updatedTask,$taskid){
+       $tasks = $this->getTasks();
+       foreach($tasks['tasks'] as $index =>$task){
+        if($task['task_id']== $taskid){
+            $tasks['tasks'][$index]=$updatedTask;
+            $this-> saveTasks($tasks);
+            echo "task updated succesfullly";
+            return true; 
+        }
+       }
+       echo "error";
+       return false;
 
     }
 
@@ -107,19 +102,6 @@ class TaskModel extends Model{
             $users["usuarios"][] = $newUser; // Agregar el nuevo usuario al array existente
             $this->saveUsers($users); // Guardar los usuarios actualizados en el archivo JSON
             return $newUser; // Devolver el nuevo usuario agregado
-
-            
-            /*$newUser=["user_name"=>$username,"password"=>$password,"email"=>$email,"id_user"=>4];
-            $users["usuarios"][] = $newUser;
-            $jsonUsers = json_encode($users);
-            file_put_contents($this->jsonUsers, $jsonUsers);
-            return $jsonUsers;*/
-
- 
-            /*$jsonUsers=json_encode($newUser);
-            $this->users[]=$jsonUsers;
-            //var_dump($this->users);
-            return $jsonUsers;*/
   
         }
     }
