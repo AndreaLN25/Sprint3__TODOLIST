@@ -9,39 +9,18 @@
 
 class ApplicationController extends Controller{
 
-	/*
-	public function indexAction()
-	{
-		$this->view->message = "hello from test::index";
-		$tasks=new TaskModel();
-		$arrayTasks=$tasks->loadData();
-		$this->view->tasks=$arrayTasks;
-		//var_dump($arrayTasks);
-		$this->view->render('application/index');
-
-	}
-
-	
-	public function checkAction()
-	{
-		echo "hello from test::check";
-		//require_once "views/layouts/layout.phtml";
-	}*/
-
 	public function getTasksAction(){  
 		$taskModel = new TaskModel();
         $allTasks = $taskModel->getTasks();
         //$this->view->allTasks = $dataJson->getTasks();
 		//var_dump($allTasks);
 		$this->view->allTasks = $allTasks; 
+		$this->view->task_assigned_to = $allTasks['task_assigned_to'];
 
-        /*$this->view->render('scripts/application/getTasks');*/
-		//$this->view->render('application/getTasks.phtml'); duplica la vista 
     }
 
 
 	public function createTaskAction() {
-        var_dump($_POST);
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 			if(isset($_SESSION["user_id"])){ //login 
@@ -63,7 +42,6 @@ class ApplicationController extends Controller{
                 $taskModel = new TaskModel();
                 $taskModel->createTask($newTask);
 
-                /*header("Location: /A_IT_ACADEMY_FULL_STACK_PHP/Sprint3__TODOLIST/web/getTasks");*/
 				header("Location: " . WEB_ROOT . "/getTasks");
                 exit();
             } else {
@@ -86,7 +64,6 @@ class ApplicationController extends Controller{
 			if ($taskByID !== "Task not found") {
 				$this->view->task = $taskByID; 
 				$this->view->allTasks= $taskModel->getTasks(); 
-				//$this->view->render('application/getTaskById.phtml');
 			} else {
 				echo "Task not found";
 			}
@@ -102,7 +79,6 @@ class ApplicationController extends Controller{
 			$result = $taskModel->deleteTask($taskId);
 
 			if ($result === "Task deleted")	{
-				/*header("Location: /A_IT_ACADEMY_FULL_STACK_PHP/Sprint3__TODOLIST/web/getTasks");*/
 				header("Location: " . WEB_ROOT . "/getTasks");
 				exit();
 			} else {
@@ -115,7 +91,6 @@ class ApplicationController extends Controller{
 	
 	
 	public function editTaskAction(){
-
         //selecionar la task a editar 
         //ingresar nuevo valore y reemplazar lo ya existentes 
         //confirmar que los cambias han sucedido 
@@ -126,7 +101,7 @@ class ApplicationController extends Controller{
 				$taskModel = new TaskModel();
 				//$allTasks = $taskModel->getTasks(); 
 				$taskData = $taskModel->getTaskById($taskId);
-				var_dump($taskData);
+				//var_dump($taskData);
 				//$taskModel->updateTask($taskData,$taskId);
 				if ($taskData !== "Task not found") {
 					$this->view->taskData = $taskData;
@@ -151,7 +126,6 @@ class ApplicationController extends Controller{
 				'task_deadline' => $_POST['task_deadline'],
 				'task_assigned_to' => $_POST['task_assigned_to'],
 				'task_priority' => $_POST['task_priority'],
-				// Agrega otros campos si es necesario
 			];
 				$taskModel = new TaskModel();
 				$taskModel->getTaskById($taskId);
@@ -164,10 +138,7 @@ class ApplicationController extends Controller{
 				elseif($newTask===false){
 					echo "buuu";
 				}
-				
-
 		}
-
 	}
 
 	
@@ -187,7 +158,6 @@ class ApplicationController extends Controller{
             if ($authenticatedUser !== null && isset($authenticatedUser['user_name'])) {
                 $_SESSION['user_id'] = $authenticatedUser['id_user'];
                 $_SESSION['username'] = $authenticatedUser['user_name'];
-                /*header("Location: /A_IT_ACADEMY_FULL_STACK_PHP/Sprint3__TODOLIST/web/getTasks");*/
 				header("Location: " . WEB_ROOT . "/getTasks");
                 exit();
             }
@@ -196,14 +166,10 @@ class ApplicationController extends Controller{
             /*$this->view->render(ROOT_PATH . '/app/views/scripts/login');*/
 			//$this->view->render(WEB_ROOT . '/app/views/scripts/login');
         }
-    } else {
-        // Si no es una solicitud POST, simplemente muestra el formulario de inicio de sesión
-        //$this->view->render(ROOT_PATH . '/app/views/scripts/login');Genera un doble vista. 
     }
 }
 
-    public function registerAction()
-	{
+    public function registerAction(){
         $loginAttempt=new TaskModel();
 
         if($_SERVER["REQUEST_METHOD"]=="POST"){
@@ -220,12 +186,8 @@ class ApplicationController extends Controller{
 				if ($loginValidation){
 					$this->view->mensaje = "Registro de usuario exitoso";
 					header("Location: " . WEB_ROOT . "/getTasks");
-					/*$this->view->render(ROOT_PATH . '/app/views/scripts/login');*/
-					//$this->view->render(WEB_ROOT . '/app/views/scripts/login');Genera un doble vista. 
 				}else{
 					$this->view->mensaje = "Error en la validación después del registro";
-					/*$this->view->render(ROOT_PATH . '/app/views/scripts/register');*/
-					//$this->view->render(WEB_ROOT . '/app/views/scripts/register');Genera un doble vista. 
 				}
 
 
@@ -233,44 +195,14 @@ class ApplicationController extends Controller{
 				$this->view->mensaje = "Error en el registro de usuario";
 				//$this->view->render(ROOT_PATH . '/app/views/scripts/register');Genera un doble vista. 
 			}
-		}else{
-			//$this->view->render('application/register.phtml');Genera un doble vista.
 		}
             $verBaseDeDATOS= $loginAttempt->loadUserData();
             //var_dump($verBaseDeDATOS);
 	}
-	/*public function logout() {
-		session_start();
-	
-		if(isset($_GET['logout'])) {
-			session_destroy();
-			header("Location: /A_IT_ACADEMY_FULL_STACK_PHP/Sprint3__TODOLIST/web/");
-			exit;
-		}
-    }
 
-	public function logout() {
-		session_start(); // Inicia la sesión si no se ha iniciado
-	
-		// Destruye todas las variables de sesión
-		$_SESSION = array();
-	
-		// Si se desea matar la sesión, también se debe eliminar la cookie de sesión
-		if (isset($_COOKIE[session_name()])) {
-			setcookie(session_name(), '', time()-42000, '/');
-		}
-	
-		// Finalmente, destruye la sesión
-		session_destroy();
-	
-		// Redirige al usuario a la página de inicio de sesión o a donde desees
-		header("Location: /A_IT_ACADEMY_FULL_STACK_PHP/Sprint3__TODOLIST/web/");
-		exit();
-	}*/
 	public function logoutAction() {
 		session_start();
 		session_destroy();
-		/*header("Location: /A_IT_ACADEMY_FULL_STACK_PHP/Sprint3__TODOLIST/web/");*/
 		header("Location: " . WEB_ROOT."/test");
 		exit;
 	}
