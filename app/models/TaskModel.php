@@ -12,15 +12,6 @@ class TaskModel extends Model{
         $this-> jsonUsers = ROOT_PATH . '/db/dataBaseUsers.json';
 
     }
-
-    /*public function loadData():array {
-        $jsonContent = file_get_contents($this->json);
-        //var_dump($jsonContent);
-        $this->tasks = json_decode($jsonContent, true);
-        //var_dump($this->tasks);
-        return $this->tasks;
-    }*/
-    
     
     public function getTasks(){
         $jsonContent = file_get_contents($this->json);
@@ -50,15 +41,37 @@ class TaskModel extends Model{
 
     public function getTaskById($taskId){
         $tasks = $this->getTasks()['tasks'];
-        //var_dump($tasks);
         foreach($tasks as $task){
-            //var_dump($tasks);
             if($task['task_id'] == $taskId){
                 return $task;
             }
         } 
         return "Task not found";
     }
+
+
+    public function updateTask($updatedTask,$taskid){
+        $tasks = $this->getTasks();
+        
+        foreach($tasks['tasks'] as $index =>$task){
+         if($task['task_id']== $taskid){
+             foreach($updatedTask as $key => $value){ //actualizar solo X valores sina afectar otros campos
+                 if (array_key_exists($key,$task)){
+                     $tasks['tasks'][$index][$key]=$value;
+                 }
+             }
+ 
+             //$tasks['tasks'][$index]=$updatedTask;
+             $this-> saveTasks($tasks);
+             echo "task updated succesfullly";
+             return true; 
+             
+         }
+        }
+        echo "error";
+        return false;
+ 
+     }
 
 
     public function deleteTask($taskId){
@@ -80,7 +93,6 @@ class TaskModel extends Model{
     }
     
 
-
     public function registerUser($username,$password,$email){
         $usersValidated= $this->validateUser($username,$password);
         if($usersValidated == false){
@@ -96,19 +108,6 @@ class TaskModel extends Model{
             $users["usuarios"][] = $newUser; // Agregar el nuevo usuario al array existente
             $this->saveUsers($users); // Guardar los usuarios actualizados en el archivo JSON
             return $newUser; // Devolver el nuevo usuario agregado
-
-            
-            /*$newUser=["user_name"=>$username,"password"=>$password,"email"=>$email,"id_user"=>4];
-            $users["usuarios"][] = $newUser;
-            $jsonUsers = json_encode($users);
-            file_put_contents($this->jsonUsers, $jsonUsers);
-            return $jsonUsers;*/
-
- 
-            /*$jsonUsers=json_encode($newUser);
-            $this->users[]=$jsonUsers;
-            //var_dump($this->users);
-            return $jsonUsers;*/
   
         }
     }
@@ -118,6 +117,7 @@ class TaskModel extends Model{
         file_put_contents($this->jsonUsers , $newJsonContent);
     }
 
+
     public function loadUserData():array {
         //var_dump($_SESSION['user_id']);
         //$newUser=[];
@@ -126,6 +126,8 @@ class TaskModel extends Model{
         $users = json_decode($jsonContent, true);
         return $users;
     }
+
+
 
     public function validateUser($username,$password,array $users= null){
         $users =  $this->loadUserData();
@@ -141,64 +143,18 @@ class TaskModel extends Model{
         return false;
     }
 
+
     public function getUserByUsername($username) {
         $users = $this->loadUserData();
         //var_dump($users);
 
         foreach ($users['usuarios'] as $user) {
             if ($user['user_name'] === $username) {
-                return $user; // Devuelve la información del usuario si se encuentra el nombre de usuario
+                return $user;
             }
         }
 
-        return null; // Devuelve null si no se encuentra el usuario
+        return null; 
     }
-
-
-
-
-
-
-
-    
-    /*
-    public function deleteTask($taskId){
-    $tasks = $this->getTasks();
-    $tasksArray = $tasks['tasks'];
-
-    $taskToDelete = $this->getTaskById($taskId);
-
-    if ($taskToDelete !== "Task not found") {
-        $taskIndex = array_search($taskToDelete, $tasksArray, true);
-        if ($taskIndex !== false) {
-            array_splice($tasksArray, $taskIndex, 1); 
-            $tasks['tasks'] = $tasksArray;
-            $this->saveTasks($tasks);
-            return "Task deleted"; 
-        }
-    }
-
-    return "Task not found or deletion failed";
-}
-    private function findTaskIndexById($taskId, $tasks){
-        foreach($tasks as $index => $task){
-            if($task['id'] == $taskId){
-                return $index; 
-            }
-        }
-    
-        return "Task ID not found"; 
-    }
-
-
-
-https://www.adaweb.es/modelo-vista-controlador-mvc-en-php-actualizado-2022/ 
-The Model class handles basic functionality such as:
-
-Setting up a database connection (using PDO)
-fetchOne(ID)
-save(array) → both update/create
-delete(ID)
-*/
 
 }

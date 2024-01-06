@@ -29,6 +29,18 @@
             "password": "gcfhvjb",
             "email": "juanhernand14@gmail.com",
             "id_user": 5
+        },
+        {
+            "user_name": "dwe",
+            "password": "wedw",
+            "email": "juanhernandez941214@gmail.com",
+            "id_user": 6
+        },
+        {
+            "user_name": "juan",
+            "password": "234",
+            "email": "juan@gmail.com",
+            "id_user": 7
         }
     ]
 }
