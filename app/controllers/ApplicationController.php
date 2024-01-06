@@ -15,7 +15,6 @@ class ApplicationController extends Controller{
         //$this->view->allTasks = $dataJson->getTasks();
 		//var_dump($allTasks);
 		$this->view->allTasks = $allTasks; 
-		$this->view->task_assigned_to = $allTasks['task_assigned_to'];
 
     }
 
@@ -125,6 +124,8 @@ class ApplicationController extends Controller{
 				'task_creation_date' => $_POST['task_creation_date'],
 				'task_deadline' => $_POST['task_deadline'],
 				'task_assigned_to' => $_POST['task_assigned_to'],
+				'task_created_by' => $_POST['task_created_by'],
+				'task_updated_by' => $_POST['task_updated_by'],
 				'task_priority' => $_POST['task_priority'],
 			];
 				$taskModel = new TaskModel();
