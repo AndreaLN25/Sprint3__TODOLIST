@@ -170,7 +170,6 @@ class ApplicationController extends Controller{
     } else {
         // Si no es una solicitud POST, simplemente muestra el formulario de inicio de sesión
         /*$this->view->render(ROOT_PATH . '/app/views/scripts/login');*/
-		$this->view->render(WEB_ROOT . '/app/views/scripts/login'); // Renderizar la vista del formulario de inicio de sesión
 
     }
 }
@@ -204,7 +203,7 @@ class ApplicationController extends Controller{
 			}
 		}else{
 			/*$this->view->render(ROOT_PATH . '/app/views/scripts/register');*/
-			$this->view->render(WEB_ROOT . '/app/views/scripts/register');
+			//$this->view->render(WEB_ROOT . '/app/views/scripts/register');
 		}
             $verBaseDeDATOS= $loginAttempt->loadUserData();
             //var_dump($verBaseDeDATOS);

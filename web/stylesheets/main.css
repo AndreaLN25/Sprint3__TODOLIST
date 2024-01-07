@@ -1,0 +1,60 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5dc; /* Beige */
+
+}
+
+header {
+    background-color: #2c1608; /* Marrón oscuro */
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+nav {
+    display: flex;
+    justify-content: flex-start; /* Cambiado a space-between */
+    align-items: center; /* Alinea los elementos verticalmente al centro */
+    background-color: #2c1608; /* Marrón oscuro */
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+}
+
+nav a:hover {
+    background-color: #4c2914; /* Marrón más claro para resaltar al pasar el mouse */
+}
+
+.page-title {
+    font-size: 200px;
+    font-weight: bold;
+    margin: 10px 0;
+    text-align: center; /* Alinea el texto al centro */
+}
+
+.sub-title {
+    font-size: 200px;
+    font-weight: bold;
+    margin: 20px 0;
+    text-align: start; /* Alinea el texto al centro */
+}
+
+.btn-black {
+    background-color: #000;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 5px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.btn-black:hover {
+    background-color: #333; /* Cambiar el color al pasar el mouse */
+}
