@@ -31,7 +31,8 @@
                         <td><?php echo isset($task['task_description']) ? $task['task_description'] : ''; ?></td>
                         <td><?php echo isset($task['task_status']) ? $task['task_status'] : ''; ?></td>
                         <td class="priority-<?php echo isset($task['task_priority']) ? $task['task_priority'] : ''; ?>">
-                        <?php echo isset($task['task_priority']) ? $task['task_priority'] : ''; ?></td>
+                        <span><?php echo isset($task['task_priority']) ? $task['task_priority'] : ''; ?></td></span>
+                        <td class="priority-<?php echo isset($task['task_priority']) ? $task['task_priority'] : ''; ?>">
                         <td><?php echo isset($task['task_assigned_to']) ? $task['task_assigned_to'] : ''; ?></td>
                         <td><?php echo isset($task['task_creation_date']) ? $task['task_creation_date'] : ''; ?></td>
                         <td><?php echo isset($task['task_deadline']) ? $task['task_deadline'] : ''; ?></td>
@@ -50,11 +51,12 @@
             </tbody>
         </table>
 
-        <button class="buttongt" onclick="location.href='<?= WEB_ROOT ?>/createTask'">Create Task</button>
+        <button class="buttongt" onclick="location.href='<?= WEB_ROOT ?>/createTask'">Create New Task</button>
         <button class="buttongt" onclick="location.href='<?= WEB_ROOT ?>/getTaskById'">Search Task By Id</button>
 
     <?php else : ?>
         <p>No tasks available.</p>
+        <button class="buttongt" onclick="location.href='<?= WEB_ROOT ?>/createTask'">Create New Task</button>
     <?php endif; ?>
 </body>
 
