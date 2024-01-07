@@ -1,0 +1,235 @@
+/* Estilos generales para el cuerpo y encabezado */
+/* StyleSheet.css */
+
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3 {
+    color: #333;
+}
+
+/* Estilos de navegación */
+nav a {
+    text-decoration: none;
+    color: #007bff;
+    margin-right: 20px;
+}
+
+nav a:hover {
+    color: #0056b3;
+}
+
+/* Estilos de formularios */
+form {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="date"],
+select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* Estilos de botones */
+.button,
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.button:hover,
+.btn:hover {
+    background-color: #0056b3;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+}
+
+.btn-secondary:hover {
+    background-color: #545b62;
+}
+
+/* Estilos de tablas */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+}
+
+
+/* Estilos específicos para la página de login */
+.login {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.login form {
+    margin-bottom: 20px;
+}
+/* Estilos específicos para la página de SignUp */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+h1 {
+    margin-top: 50px;
+}
+
+form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form label {
+    margin-bottom: 10px;
+}
+
+form input[type="text"],
+form input[type="password"],
+form input[type="email"] {
+    margin-bottom: 10px;
+    padding: 5px;
+    width: 200px;
+}
+
+form input[type="submit"] {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+form input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+
+/* Estilos específicos para la página de All Tasks */
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+.no-tasks {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+}
+
+/* Estilos específicos para la página de Delete Task */
+.delete-task {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.delete-task p {
+    margin-bottom: 20px;
+}
+
+/* Estilos específicos para la página de Update Task */
+.update-task {
+    margin-top: 20px;
+}
+
+.update-task form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.update-task label {
+    margin-bottom: 5px;
+}
+
+.update-task input[type="text"],
+.update-task input[type="date"],
+.update-task select {
+    margin-bottom: 10px;
+    padding: 5px;
+    width: 200px;
+}
+
+/* Estilos específicos para la página de Sign Up */
+.sign-up {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.sign-up h1 {
+    margin-bottom: 20px;
+}
+
+.sign-up form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sign-up input[type="text"],
+.sign-up input[type="password"],
+.sign-up input[type="email"] {
+    margin-bottom: 10px;
+    padding: 5px;
+    width: 200px;
+}
+
+.sign-up input[type="submit"] {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.sign-up input[type="submit"]:hover {
+    background-color: #0056b3;
+}

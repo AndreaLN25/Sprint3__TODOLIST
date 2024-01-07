@@ -1,7 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>All Tasks</title>
+<title>Get Task by ID</title>
+    <style>
+        .btn {
+            padding: 10px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            display: inline-block;
+            margin-right: 10px;
+            font-size: 16px;
+        }
+
+        .btn-secondary {
+            background-color: #2980b9;
+            font-size: 14px;
+        }
+
+        .btn:hover {
+            background-color: #2c3e50;
+        }
+</style>
+
+    </style>
 </head>
 <body>
     <?php 
@@ -40,15 +64,16 @@
         <form method="GET" action="">
             <label for="task_id">Search Task by ID:</label>
             <input type="number" id="task_id" name="task_id">
-            <button type="submit">Search</button>
+            <button type="submit" class="btn">Search</button>
         </form>
     <?php endif; ?>
     <?php if (isset($task) && $task['task_id'] === $requestedTaskId): ?>
         <form method="post" action="<?= WEB_ROOT ?>/application/deleteTask">
             <input type="hidden" name="task_id" value="<?php echo $task['task_id']; ?>">
-            <input type="submit" value="Delete Task">
+            <input type="submit" value="Delete Task" class="btn">
         </form>
     <?php endif; ?>
-    <a href="<?php echo WEB_ROOT; ?>/getTasks">Ver tareas</a>
+    <a href="<?php echo WEB_ROOT; ?>/getTasks" class="btn">Ver tareas</a>
 </body>
 </html>
+
