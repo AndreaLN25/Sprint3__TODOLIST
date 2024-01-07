@@ -4,6 +4,28 @@
     <title>Create Task</title>
 </head>
 <body>
+    <style>
+        .btn {
+            padding: 10px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            display: inline-block;
+            margin-right: 10px;
+            font-size: 16px; 
+        }
+
+        .btn-secondary {
+            background-color: #2980b9;
+            font-size: 14px
+        }
+
+        .btn:hover {
+            background-color: #2c3e50;
+        }
+    </style>
 <h2>Create New Task</h2>
     <form method="post" action="<?= WEB_ROOT ?>/createTask">
     <label for="task_id">Task ID:</label>
@@ -44,8 +66,8 @@
         <label for="task_updated_by">Task Updated By:</label>
         <input type="text" id="task_updated_by" name="task_updated_by"><br><br>
 
-        <input type="submit" value="Create Task">
-        <a href="<?= WEB_ROOT ?>/getTasks">Go Back to Tasks</a>
+        <input type="submit" value="Create Task" class="btn">
+        <a href="<?= WEB_ROOT ?>/getTasks" class="btn btn-secondary">Go Back to Tasks</a>
     </form>
 </body>
 </html>

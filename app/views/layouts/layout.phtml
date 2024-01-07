@@ -31,6 +31,9 @@
 	<header>
         <nav>
             <a href= "<?php echo WEB_ROOT; ?>/test">HOME</a>
+            <?php if(isset($_SESSION['username'])): ?>
+                <span><?php echo $_SESSION['username']; ?></span>
+            <?php endif; ?>
             <a href="<?php echo WEB_ROOT; ?>/logout">LOGOUT</a>
         </nav>
 

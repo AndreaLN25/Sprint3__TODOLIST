@@ -17,6 +17,25 @@
         th {
             background-color: #f2f2f2;
         }
+        a.button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        a.button:hover {
+            background-color: #0056b3;
+        }
+        .no-tasks {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f2f2f2;
+            border-radius: 5px;
+        }
     </style>    
 </head>
 
@@ -64,11 +83,13 @@
                 <?php endforeach; ?>
             </tbody>
         </table>
-        <a href="<?= WEB_ROOT ?>/createTask">Create Task</a>
-        <a href="<?= WEB_ROOT ?>/getTaskById">Search Task By Id</a>
-        <a href="<?php echo WEB_ROOT; ?>/logout">log out</a>
+        <a href="<?= WEB_ROOT ?>/createTask" class="button">Create Task</a>
+        <a href="<?= WEB_ROOT ?>/getTaskById" class="button">Search Task By Id</a>
+        <a href="<?php echo WEB_ROOT; ?>/logout" class="button">Log out</a>
     <?php else : ?>
-        <p>No tasks available.</p>
+        <div class="no-tasks">
+            <p>No tasks available :( ).</p>
+        </div>
     <?php endif; ?>
 </body>
 
