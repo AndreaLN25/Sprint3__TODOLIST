@@ -75,6 +75,33 @@ nav a:hover {
     background-color: #333; 
 }
 
+
+/* Estilos de botones */
+.button,
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #747261;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.button:hover,
+.btn:hover {
+    background-color: #e6b63d;
+}
+
+.btn-secondary {
+    background-color: #3489aa;
+}
+
+.btn-secondary:hover {
+    background-color: #545b62;
+}
+
+
 .lineas {
     max-width: 100%;
     height: auto;

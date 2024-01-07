@@ -22,7 +22,7 @@
             <a href="<?= WEB_ROOT; ?>/applicationRegister">Registro</a>
         <?php else: ?>
             <h1>Bienvenido, <?php echo isset($_SESSION['username']) ? $_SESSION['username'] : 'Usuario'; ?></h1>
-            <a href="<?php echo WEB_ROOT; ?>/getTasks">Ver tareas</a>
+            <a href="<?php echo WEB_ROOT; ?>/getTasks" class="btn">Ver tareas</a>
         <?php endif; ?>
     </div>
     <?php echo $this->mensaje; ?>
