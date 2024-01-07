@@ -2,6 +2,7 @@
 <html>
 
 <head>
+<link rel="stylesheet" href="<?php echo WEB_ROOT; ?>/stylesheets/main.css">
 <title>All Tasks</title>
     <style>
         table {
@@ -57,16 +58,18 @@
                         <td>
                             <form method="post" action="<?= WEB_ROOT ?>/editTask">
                                 <input type="hidden" name="task_id" value="<?php echo $task['task_id']; ?>">
-                                <button type="submit">Editar</button>
+                                <button class="buttongt" type="submit">Editar</button>
                             </form>
                         </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
-        <a href="<?= WEB_ROOT ?>/createTask">Create Task</a>
-        <a href="<?= WEB_ROOT ?>/getTaskById">Search Task By Id</a>
-        <a href="<?php echo WEB_ROOT; ?>/logout">log out</a>
+
+        <button class="buttongt" onclick="location.href='<?= WEB_ROOT ?>/createTask'">Create Task</button>
+        <button class="buttongt" onclick="location.href='<?= WEB_ROOT ?>/getTaskById'">Search Task By Id</button>
+        
+
     <?php else : ?>
         <p>No tasks available.</p>
     <?php endif; ?>
