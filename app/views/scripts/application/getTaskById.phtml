@@ -7,11 +7,9 @@
     <?php 
     if (isset($_GET['task_id']) && !empty($_GET['task_id'])) {
         $requestedTaskId = strval($_GET['task_id']); 
-        //var_dump($requestedTaskId);
         if (isset($this->allTasks['tasks']) && count($this->allTasks['tasks']) > 0) {
             foreach ($this->allTasks['tasks'] as $task) {
-                //var_dump($task);
-                if ($task['task_id'] === $requestedTaskId) {//paso ambos datos a int por antes compara strign con int
+                if ($task['task_id'] === $requestedTaskId) {
                     echo "This is your Task: ";
                     ?>
                     <h2>Task:</h2>

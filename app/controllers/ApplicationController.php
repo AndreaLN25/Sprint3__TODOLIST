@@ -12,17 +12,14 @@ class ApplicationController extends Controller{
 	public function getTasksAction(){  
 		$taskModel = new TaskModel();
         $allTasks = $taskModel->getTasks();
-        //$this->view->allTasks = $dataJson->getTasks();
-		//var_dump($allTasks);
 		$this->view->allTasks = $allTasks; 
-
     }
 
 
 	public function createTaskAction() {
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-			if(isset($_SESSION["user_id"])){ //login 
+			if(isset($_SESSION["user_id"])){  
 				$creationDate = isset($_POST['task_creation_date']) ? $_POST["task_creation_date"] : "";
 				$taskDeadline = date('Y-m-d', strtotime($creationDate . ' +1 month'));
 				$newTask = array(
@@ -32,7 +29,7 @@ class ApplicationController extends Controller{
 					"task_creation_date" => date("Y-m-d H:i"),
 					"task_updated_at" => date("Y-m-d H:i"),
 					"task_deadline" => isset($_POST["task_deadline"]) ? $_POST["task_deadline"] : "",
-					"task_assigned_to" => isset($_POST["task_assigned_to"]) ? intval($_POST["task_assigned_to"]) :0,//onvierte el valor de $_POST["task_assigned_to"] a un entero utilizando la función intval. 
+					"task_assigned_to" => isset($_POST["task_assigned_to"]) ? intval($_POST["task_assigned_to"]) :0,
 					"task_created_by" => $_SESSION["user_id"] ,
 					"task_updated_by" => $_SESSION["user_id"] ,
 					"task_priority" => isset($_POST["task_priority"]) ? $_POST["task_priority"] : ""
@@ -47,7 +44,6 @@ class ApplicationController extends Controller{
                 echo "User session not found.";
 			}
         }
-       // $this->view->render('createTask');
     }
 
 
@@ -56,7 +52,6 @@ class ApplicationController extends Controller{
 			$taskId = $_GET['task_id'];
 	
 			$taskModel = new TaskModel();
-			//$allTasks = $taskModel->getTasks(); 
 	
 			$taskByID = $taskModel->getTaskById($taskId);
 	
@@ -77,7 +72,7 @@ class ApplicationController extends Controller{
 			$taskModel = new TaskModel();
 			$result = $taskModel->deleteTask($taskId);
 
-			if ($result === "Task deleted")	{
+			if ($result === "Task deleted"){
 				header("Location: " . WEB_ROOT . "/getTasks");
 				exit();
 			} else {
@@ -90,21 +85,14 @@ class ApplicationController extends Controller{
 	
 	
 	public function editTaskAction(){
-        //selecionar la task a editar 
-        //ingresar nuevo valore y reemplazar lo ya existentes 
-        //confirmar que los cambias han sucedido 
 		if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['task_id'])){
 	
 			if (isset($_POST['task_id'])) {
 				$taskId = $_POST['task_id'];
 				$taskModel = new TaskModel();
-				//$allTasks = $taskModel->getTasks(); 
 				$taskData = $taskModel->getTaskById($taskId);
-				//var_dump($taskData);
-				//$taskModel->updateTask($taskData,$taskId);
 				if ($taskData !== "Task not found") {
 					$this->view->taskData = $taskData;
-					//$this->view->render('application/editTask.phtml'); // Nombre de tu vista de edición
 				} else {
 					echo "Task not found";
 				}
@@ -113,6 +101,7 @@ class ApplicationController extends Controller{
 	
        
     }
+
 
 	public function updateTaskAction(){
 		if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['task_id'])){
@@ -143,39 +132,33 @@ class ApplicationController extends Controller{
 	}
 
 	
-
 	public function loginAction(){
     $loginAttempt = new TaskModel();
 
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $username = $_POST["username"];
-        $password = $_POST["password"];
+		if ($_SERVER["REQUEST_METHOD"] == "POST") {
+			$username = $_POST["username"];
+			$password = $_POST["password"];
 
-        $loginResult = $loginAttempt->validateUser($username, $password);
+			$loginResult = $loginAttempt->validateUser($username, $password);
 
-        if ($loginResult == true) {
-            $authenticatedUser = $loginAttempt->getUserByUsername($username);
+			if ($loginResult == true) {
+				$authenticatedUser = $loginAttempt->getUserByUsername($username);
 
-            if ($authenticatedUser !== null && isset($authenticatedUser['user_name'])) {
-                $_SESSION['user_id'] = $authenticatedUser['id_user'];
-                $_SESSION['username'] = $authenticatedUser['user_name'];
-				header("Location: " . WEB_ROOT . "/getTasks");
-                exit();
-            }
-        } else {
-            $this->view->mensaje = "Usuario no válido";
-            /*$this->view->render(ROOT_PATH . '/app/views/scripts/login');*/
-			//$this->view->render(WEB_ROOT . '/app/views/scripts/login');
-        }
-    } else {
-        // Si no es una solicitud POST, simplemente muestra el formulario de inicio de sesión
-        /*$this->view->render(ROOT_PATH . '/app/views/scripts/login');*/
+				if ($authenticatedUser !== null && isset($authenticatedUser['user_name'])) {
+					$_SESSION['user_id'] = $authenticatedUser['id_user'];
+					$_SESSION['username'] = $authenticatedUser['user_name'];
+					header("Location: " . WEB_ROOT . "/getTasks");
+					exit();
+				}
+			} else {
+				$this->view->mensaje = "Usuario no válido";
+			}
+		}
+	}
 
-    }
-}
-
+	
     public function registerAction(){
-        $loginAttempt=new TaskModel();
+        $loginAttempt = new TaskModel();
 
         if($_SERVER["REQUEST_METHOD"]=="POST"){
             $username = $_POST["username"];
@@ -198,16 +181,12 @@ class ApplicationController extends Controller{
 
 			}else{
 				$this->view->mensaje = "Error en el registro de usuario";
-				/*$this->view->render(ROOT_PATH . '/app/views/scripts/register');*/
 				$this->view->render(WEB_ROOT . '/app/views/scripts/register');
 			}
-		}else{
-			/*$this->view->render(ROOT_PATH . '/app/views/scripts/register');*/
-			//$this->view->render(WEB_ROOT . '/app/views/scripts/register');
 		}
             $verBaseDeDATOS= $loginAttempt->loadUserData();
-            //var_dump($verBaseDeDATOS);
 	}
+	
 
 	public function logoutAction() {
 		session_start();
