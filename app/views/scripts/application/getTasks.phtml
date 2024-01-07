@@ -4,27 +4,12 @@
 <head>
 <link rel="stylesheet" href="<?php echo WEB_ROOT; ?>/stylesheets/main.css">
 <title>All Tasks</title>
-    <style>
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
-        th,
-        td {
-            border: 1px solid #dddddd;
-            text-align: left;
-            padding: 8px;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-    </style>    
 </head>
 
 <body>
     <?php
     if (isset($this->allTasks['tasks']) && count($this->allTasks['tasks']) > 0) : ?>
-        <table>
+        <table class="table-tasks">
             <thead>
                 <tr>
                     <th>Task ID</th>
@@ -37,7 +22,6 @@
                     <th>Updated At</th>
                     <th>Created By</th>
                     <th>Updated By</th>
-
                 </tr>
             </thead>
             <tbody>
@@ -46,7 +30,8 @@
                         <td><?php echo isset($task['task_id']) ? $task['task_id'] : ''; ?></td>
                         <td><?php echo isset($task['task_description']) ? $task['task_description'] : ''; ?></td>
                         <td><?php echo isset($task['task_status']) ? $task['task_status'] : ''; ?></td>
-                        <td><?php echo isset($task['task_priority']) ? $task['task_priority'] : ''; ?></td>
+                        <td class="priority-<?php echo isset($task['task_priority']) ? $task['task_priority'] : ''; ?>">
+                        <?php echo isset($task['task_priority']) ? $task['task_priority'] : ''; ?></td>
                         <td><?php echo isset($task['task_assigned_to']) ? $task['task_assigned_to'] : ''; ?></td>
                         <td><?php echo isset($task['task_creation_date']) ? $task['task_creation_date'] : ''; ?></td>
                         <td><?php echo isset($task['task_deadline']) ? $task['task_deadline'] : ''; ?></td>
@@ -67,7 +52,6 @@
 
         <button class="buttongt" onclick="location.href='<?= WEB_ROOT ?>/createTask'">Create Task</button>
         <button class="buttongt" onclick="location.href='<?= WEB_ROOT ?>/getTaskById'">Search Task By Id</button>
-        
 
     <?php else : ?>
         <p>No tasks available.</p>
