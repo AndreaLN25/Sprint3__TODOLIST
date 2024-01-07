@@ -6,13 +6,13 @@
 <body>
     <?php 
     if (isset($_GET['task_id']) && !empty($_GET['task_id'])) {
-        $requestedTaskId = $_GET['task_id']; 
+        $requestedTaskId = strval($_GET['task_id']); 
         //var_dump($requestedTaskId);
         if (isset($this->allTasks['tasks']) && count($this->allTasks['tasks']) > 0) {
             foreach ($this->allTasks['tasks'] as $task) {
                 //var_dump($task);
-                if ((int)$task['task_id'] === (int)$requestedTaskId) {//paso ambos datos a int por antes compara strign con int
-                    echo "se encontro conisdencia";
+                if ($task['task_id'] === $requestedTaskId) {//paso ambos datos a int por antes compara strign con int
+                    echo "This is your Task: ";
                     ?>
                     <h2>Task:</h2>
                     <p><strong>Task ID:</strong> <?php echo $task['task_id']; ?></p>
@@ -39,16 +39,16 @@
     <?php if (!isset($task) || $task['task_id'] !== $requestedTaskId): ?>
         <form method="GET" action="">
             <label for="task_id">Search Task by ID:</label>
-            <input type="number" id="task_id" name="task_id">
+            <input type="text" id="task_id" name="task_id">
             <button type="submit">Search</button>
         </form>
     <?php endif; ?>
     <?php if (isset($task) && $task['task_id'] === $requestedTaskId): ?>
-        <form method="post" action="<?= WEB_ROOT ?>/application/deleteTask">
+        <form method="post" action="<?= WEB_ROOT ?>/deleteTask">
             <input type="hidden" name="task_id" value="<?php echo $task['task_id']; ?>">
             <input type="submit" value="Delete Task">
         </form>
     <?php endif; ?>
-    <a href="<?php echo WEB_ROOT; ?>/getTasks">Ver tareas</a>
+    <a href="<?php echo WEB_ROOT; ?>/getTasks">See tasks</a>
 </body>
 </html>
