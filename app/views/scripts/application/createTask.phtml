@@ -6,8 +6,8 @@
 <body>
 <h2>Create New Task</h2>
     <form method="post" action="<?= WEB_ROOT ?>/createTask">
-    <label for="task_id">Task ID:</label>
-        <input type="text" id="task_id" name="task_id"><br><br>
+        <label for="task_id">Task ID:</label>
+        <input type="text" id="task_id" name="task_id" value="<?= isset($task_id) ? $task_id : 'uniqid'() ?>" readonly><br><br>
 
         <label for="task_description">Description:</label>
         <input type="text" id="task_description" name="task_description"><br><br>

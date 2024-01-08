@@ -19,12 +19,13 @@ class ApplicationController extends Controller{
 	public function createTaskAction() {
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-			if(isset($_SESSION["user_id"])){  
-				$user_id = $_SESSION["user_id"];
+			if(isset($_SESSION["username"])){  
+				$user_id = $_SESSION["username"];
 				$creationDate = isset($_POST['task_creation_date']) ? $_POST["task_creation_date"] : "";
 				$taskDeadline = date('Y-m-d', strtotime($creationDate . ' +1 month'));
+				$task_id = uniqid();
 				$newTask = array(
-					"task_id" => uniqid(),
+					"task_id" => $task_id,
 					"task_description" => isset($_POST["task_description"]) ? $_POST["task_description"] : "",
 					"task_status" => isset($_POST["task_status"]) ? $_POST["task_status"] : "pending",
 					"task_creation_date" => date("Y-m-d H:i"),
