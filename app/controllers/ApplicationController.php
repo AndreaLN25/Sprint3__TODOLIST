@@ -20,6 +20,7 @@ class ApplicationController extends Controller{
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 			if(isset($_SESSION["user_id"])){  
+				$user_id = $_SESSION["user_id"];
 				$creationDate = isset($_POST['task_creation_date']) ? $_POST["task_creation_date"] : "";
 				$taskDeadline = date('Y-m-d', strtotime($creationDate . ' +1 month'));
 				$newTask = array(
@@ -30,8 +31,8 @@ class ApplicationController extends Controller{
 					"task_updated_at" => date("Y-m-d H:i"),
 					"task_deadline" => isset($_POST["task_deadline"]) ? $_POST["task_deadline"] : "",
 					"task_assigned_to" => isset($_POST["task_assigned_to"]) ? intval($_POST["task_assigned_to"]) :0,
-					"task_created_by" => $_SESSION["user_id"] ,
-					"task_updated_by" => $_SESSION["user_id"] ,
+					"task_created_by" =>strval($user_id),
+					"task_updated_by" => strval($user_id),
 					"task_priority" => isset($_POST["task_priority"]) ? $_POST["task_priority"] : ""
 				);
             

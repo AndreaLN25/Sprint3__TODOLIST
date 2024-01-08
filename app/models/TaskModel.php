@@ -25,6 +25,11 @@ class TaskModel extends Model{
             $newTask['task_creation_date'] = date("Y-m-d H:i:s");
         }
 
+        if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
+            $newTask['task_created_by'] = $_SESSION['username']; 
+        }
+        var_dump($newTask['task_created_by']);
+
         $tasks = $this->getTasks();
         if (!isset($tasks['tasks'])) {
             $tasks['tasks'] = array();

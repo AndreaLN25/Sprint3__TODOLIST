@@ -38,8 +38,11 @@
         <label for="task_updated_at">Task Updated At:</label>
         <input type="text" id="task_updated_at" name="task_updated_at"><br><br>
 
+        <!-- <label for="task_created_by">Task Created By:</label>-->
+        <!-- <input type="text" id="task_created_by" name="task_created_by"><br><br>-->
         <label for="task_created_by">Task Created By:</label>
-        <input type="text" id="task_created_by" name="task_created_by"><br><br>
+        <input type="text" id="task_created_by" name="task_created_by" value="<?= isset($_SESSION['username']) ? $_SESSION['username'] : '' ?>">
+
 
         <label for="task_updated_by">Task Updated By:</label>
         <input type="text" id="task_updated_by" name="task_updated_by"><br><br>
