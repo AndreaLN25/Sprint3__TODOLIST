@@ -194,6 +194,61 @@ class ApplicationController extends Controller{
 		header("Location: " . WEB_ROOT."/test");
 		exit;
 	}
+
+	//norberto
+	function createTaskList($taskManager){ //funcion crear lista de tareas !!!!ESTO DEBERIA IR EN EL CONTROLADOR?¿?!!!!
+        $taskManager->displayAvailableTasks();
+        $listaTareas = $taskManager->selectTasksForList();
+    
+        $nombreLista = readline("Introduce el nombre de la lista de tareas ");//cambiar para que se introduzcan los datos a traves del html de la web mediante formulario
+        $prioridadLista = (int)readline("Ingresa la prioridad de la lista de tareas: ");
+    
+        //bucle por si introduce un número erróneo (esto ha de controlarse luego mediante html)
+        while ($prioridadLista < 1 || $prioridadLista > 3){
+            echo "La prioridad debe estar entre 1 y 3" . PHP_EOL;
+            $prioridadLista = (int)readline("Ingresa la prioridad de la lista de tareas: ");
+        }
+    
+        $lista = [
+            'nombre' => $nombreLista,
+            'prioridad' => $prioridadLista,
+            'tareas' => $listaTareas
+        ];
+        return $lista;
+    }
+
+    public function processTaskList() {//guardar los datos del formulario en el json
+        $taskManager = new TaskManager('../db/dataBase.json');
+        
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $nombreLista = $_POST['nombreLista'];
+            $prioridad = $_POST['prioridad'];
+            $tareasSeleccionadas = $_POST['tareas']; 
+            $lista = [
+                'nombre' => $nombreLista,
+                'prioridad' => $prioridad,
+                'tareas' => $tareasSeleccionadas
+            ];
+            
+            $this->saveTaskList($lista);
+
+            // Después de guardar, podrías redirigir a una página de éxito
+            require('../views/successMessage.php');
+        }
+    }
+    function saveTaskList($lista){
+        $listaJson = json_encode($lista, JSON_PRETTY_PRINT); //codifica el array asociativo en JSON para poder almacenar la informacion
+        $numeroLista = rand(1,1000);//numero random para cada archivo que se genere (puede ocurrir q se generen dos listas con el mismo numero y pete XD aunq la probabilidad es baja teniendo en cuenta que es hasta 1000)
+        $nombreArchivoLista = "Lista$numeroLista.json";
+    
+        // Ruta a la carpeta 'db' donde deseas guardar los archivos
+        $ruta_db = 'C:/Users/formacio/Desktop/Sprint3__TODOLIST/db/';
+    
+        // Ruta completa al archivo de la lista en la carpeta 'db'
+        $rutaCompleta = $ruta_db . $nombreArchivoLista;
+    
+        file_put_contents($rutaCompleta, $listaJson);
+    }
 	
 }
 ?>
