@@ -233,7 +233,7 @@ class ApplicationController extends Controller{
             $this->saveTaskList($lista);
 
             // Después de guardar, podrías redirigir a una página de éxito
-            require('../views/successMessage.php');
+            require('../views/successMessage.php'); //HACERLO CON RUTAS
         }
     }
     function saveTaskList($lista){
