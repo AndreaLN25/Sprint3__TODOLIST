@@ -9,7 +9,7 @@
 <body>
     <?php
         if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
-            $user_id = $_SESSION['user_id'];
+            $user_id = $_SESSION['username'];
             
             // Filtrar las tareas basadas en el usuario logeado
             $tasks_assigned_to_user = [];
