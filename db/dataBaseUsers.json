@@ -41,6 +41,24 @@
             "password": "234",
             "email": "juan@gmail.com",
             "id_user": 7
+        },
+        {
+            "user_name": "pepe",
+            "password": "123",
+            "email": "pepe@gma",
+            "id_user": 8
+        },
+        {
+            "user_name": "mario",
+            "password": "2435",
+            "email": "asd@feadfsg",
+            "id_user": 9
+        },
+        {
+            "user_name": "fgsdn",
+            "password": "gbdnf",
+            "email": "xscd@gdsfh",
+            "id_user": 10
         }
     ]
 }
