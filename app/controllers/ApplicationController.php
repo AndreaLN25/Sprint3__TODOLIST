@@ -123,8 +123,9 @@ class ApplicationController extends Controller{
 				$newTask=$taskModel->updateTask($updatedTaskData,$taskId);
 				
 				if($newTask===true){
-					echo "yeiii";
+					echo '<script>alert("yeiii");</script>';
 					header("Location: " . WEB_ROOT . "/getTasks");
+					exit;
 				}
 				elseif($newTask===false){
 					echo "buuu";
