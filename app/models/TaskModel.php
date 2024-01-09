@@ -4,6 +4,7 @@ class TaskModel extends Model{
     protected $users = [];
     protected $json;
     protected $jsonUsers;
+    private $tasksData; //almacenar los datos de tareas N
 
 
     public function __construct(){
@@ -144,5 +145,38 @@ class TaskModel extends Model{
             }
         }
         return null; 
+    }
+
+    //N update model
+    public function __construct($jsonFilePath){
+        //leer el archivo json de tareas y los guarda
+        $this->tasksData = json_decode(file_get_contents($jsonFilePath), true);  
+    }
+
+    //funciones 
+    //mostrar tareas que hay en dataBase
+    public function displayAvailableTasks(){
+        echo "Tareas disponibles: " . PHP_EOL;
+        foreach ($this->tasksData['tareas'] as $tarea){
+            echo "ID " . $tarea['task_id'] . " - Descripcion: " . $tarea['task_description'] . PHP_EOL;
+        }
+    }
+
+    //seleccionar las las tareas para crear la lista de tareas
+    public function selectTasksForList(){
+        $listaTareas = [];
+        while (true){
+            $idTarea = readline("Selecciona una tarea por su ID para agregar a la lista (0 para terminar): ");
+            if ($idTarea == 0){
+                break;
+            }
+
+            foreach ($this->tasksData['tareas'] as $tarea){
+                if ($tarea['task_id']== $idTarea){
+                    $listaTareas[]= $idTarea;
+                }
+            }
+        }
+        return $listaTareas;
     }
 }
