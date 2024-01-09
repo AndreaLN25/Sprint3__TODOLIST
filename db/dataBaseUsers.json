@@ -59,6 +59,60 @@
             "password": "gbdnf",
             "email": "xscd@gdsfh",
             "id_user": 10
+        },
+        {
+            "user_name": "adrian",
+            "password": "1234",
+            "email": "adrian08@gmail.com",
+            "id_user": 11
+        },
+        {
+            "user_name": "ruben",
+            "password": "3456",
+            "email": "ruben@hotmail.com",
+            "id_user": 12
+        },
+        {
+            "user_name": "andrea2",
+            "password": "2344",
+            "email": "juanhernande456z941214@gmail.com",
+            "id_user": 13
+        },
+        {
+            "user_name": "andrea2",
+            "password": "dfrg",
+            "email": "juanhernande456z941214@gmail.com",
+            "id_user": 14
+        },
+        {
+            "user_name": "andrea123",
+            "password": "defsrgt",
+            "email": "adnrea@gmail.com",
+            "id_user": 15
+        },
+        {
+            "user_name": "juan234",
+            "password": "dasndj",
+            "email": "fesd@gmail.com",
+            "id_user": 16
+        },
+        {
+            "user_name": "herna",
+            "password": "1234",
+            "email": "hern@hormali.com",
+            "id_user": 17
+        },
+        {
+            "user_name": "adefsr",
+            "password": "sadwsef",
+            "email": "juanhernandez941214@gmail.com",
+            "id_user": 18
+        },
+        {
+            "user_name": "oncecuarenta",
+            "password": "1234",
+            "email": "oncecuarenta@gmail.com",
+            "id_user": 22
         }
     ]
 }

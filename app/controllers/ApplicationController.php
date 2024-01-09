@@ -9,6 +9,8 @@
 
 class ApplicationController extends Controller{
 
+	
+
 	public function getTasksAction(){  
 		$taskModel = new TaskModel();
         $allTasks = $taskModel->getTasks();
@@ -170,15 +172,17 @@ class ApplicationController extends Controller{
             $loginRegisterOK=$loginAttempt->registerUser($username,$password,$email);
 
 			if ($loginRegisterOK){
-				$loginValidation=$loginAttempt->validateUser($username,$password);
-				var_dump($loginValidation);
+				//$loginValidation=$loginAttempt->validateUser($username,$password);
+				$this->loginAction($username, $password);
 
-				if ($loginValidation){
-					$this->view->mensaje = "Registro de usuario exitoso";
-					header("Location: " . WEB_ROOT . "/getTasks");
-				}else{
-					$this->view->mensaje = "Error en la validación después del registro";
-				}
+			//	var_dump($loginValidation);
+
+			//if ($loginValidation){
+			//		$this->view->mensaje = "Registro de usuario exitoso";
+			//		header("Location: " . WEB_ROOT . "/getTasks");
+			//	}else{
+			//		$this->view->mensaje = "Error en la validación después del registro";
+			//	}
 
 
 			}else{

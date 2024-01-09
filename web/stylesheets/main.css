@@ -45,6 +45,11 @@ nav a.logout-link {
     margin-bottom: 5px;
 
 }
+.createTaskTitle{
+    font-size: 100px;
+    text-align: center; 
+
+}
 .lineas {
     max-width: 100%;
     height: auto;

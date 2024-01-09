@@ -12,7 +12,7 @@
         <?php 
         if(!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])): ?>
             <h1>Sistema de Login</h1>
-            <form action="" method="post"> 
+            <form method="post" action="<?= WEB_ROOT ?>/application"> 
                 <label for="username">Usuario</label>
                 <input type="text" name="username" placeholder="Usuario" id="username" required>
                 <label for="password">Contraseña</label>
