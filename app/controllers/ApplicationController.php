@@ -60,9 +60,9 @@ class ApplicationController extends Controller{
 			if ($taskByID !== "Task not found") {
 				$this->view->task = $taskByID; 
 				$this->view->allTasks= $taskModel->getTasks(); 
-			} else {
+			} else {	
 				echo "Task not found";
-			}
+			}	
 		}
 	}
 
@@ -126,9 +126,9 @@ class ApplicationController extends Controller{
 				if($newTask===true){
 					echo "yeiii";
 					header("Location: " . WEB_ROOT . "/getTasks");
-				}
-				elseif($newTask===false){
-					echo "buuu";
+					exit;
+				}else{
+					echo "Error in updating";
 				}
 		}
 	}

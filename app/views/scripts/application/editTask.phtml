@@ -23,9 +23,9 @@
 
         <label for="task_priority">Priority:</label>
         <select id="task_priority" name="task_priority">
-            <option value=<?php echo ($this->taskData['task_priority'] == 1) ? 'selected' : ''; ?>> 1</option>
-            <option value=<?php echo ($this->taskData['task_priority'] == 2) ? 'selected' : ''; ?>> 2</option>
-            <option value=<?php echo ($this->taskData['task_priority'] == 3) ? 'selected' : ''; ?>> 3</option>
+            <option value= "1"<?php echo ($this->taskData['task_priority'] == 1) ? 'selected' : ''; ?>> 1</option>
+            <option value="2"<?php echo ($this->taskData['task_priority'] == 2) ? 'selected' : ''; ?>> 2</option>
+            <option value="3"<?php echo ($this->taskData['task_priority'] == 3) ? 'selected' : ''; ?>> 3</option>
         </select><br><br>
 
         <label for="task_updated_at">Task Updated At:</label>
@@ -38,4 +38,4 @@
         <input type="text" id="task_updated_by" name="task_updated_by" value="<?php echo $this->taskData['task_updated_by']; ?>"><br><br>
 
     <button type="submit">Guardar cambios</button>
-</form>
+</form>     
