@@ -21,7 +21,7 @@
 
         <fieldset>
             <legend>Tareas Disponibles</legend>
-            <?php foreach ($tasksData as $tarea) : ?>
+            <?php foreach ($tasksData['tareas'] as $tarea) : ?>
                 <input type="checkbox" id="tarea<?= $tarea['task_id'] ?>" name="tareas[]" value="<?= $tarea['task_id'] ?>">
                 <label for="tarea<?= $tarea['task_id'] ?>"><?= $tarea['task_description'] ?></label><br>
             <?php endforeach; ?>
@@ -31,3 +31,4 @@
     </form>
 </body>
 </html>
+

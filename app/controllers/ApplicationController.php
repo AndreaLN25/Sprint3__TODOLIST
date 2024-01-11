@@ -236,19 +236,28 @@ class ApplicationController extends Controller{
             require('../views/successMessage.php'); //HACERLO CON RUTAS
         }
     }
-    function saveTaskList($lista){
-        $listaJson = json_encode($lista, JSON_PRETTY_PRINT); //codifica el array asociativo en JSON para poder almacenar la informacion
-        $numeroLista = rand(1,1000);//numero random para cada archivo que se genere (puede ocurrir q se generen dos listas con el mismo numero y pete XD aunq la probabilidad es baja teniendo en cuenta que es hasta 1000)
-        $nombreArchivoLista = "Lista$numeroLista.json";
-    
-        // Ruta a la carpeta 'db' donde deseas guardar los archivos
-        $ruta_db = 'C:/Users/formacio/Desktop/Sprint3__TODOLIST/db/';
-    
-        // Ruta completa al archivo de la lista en la carpeta 'db'
-        $rutaCompleta = $ruta_db . $nombreArchivoLista;
-    
-        file_put_contents($rutaCompleta, $listaJson);
-    }
+    //norberto
+	public function createTaskListFormAction() {
+		// Obtener los datos de las tareas desde el archivo JSON
+		$jsonFilePath = __DIR__ . '/../../db/dataBase.json';
+		$jsonContent = file_get_contents($jsonFilePath);
+	
+		// Convertir el contenido del JSON a un arreglo asociativo en PHP
+		$tasksData = json_decode($jsonContent, true);
+	
+		// Verificar si la decodificación fue exitosa
+		if ($tasksData === null) {
+			// Manejar el error, por ejemplo, mostrando un mensaje o redirigiendo a una página de error
+			die('Error al decodificar el archivo JSON');
+		}
+	
+
+	
+
+	}
+	
+
+
 	
 }
 ?>
