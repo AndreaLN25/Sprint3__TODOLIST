@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tareas</title>
+    <!-- Agrega tu enlace al archivo de estilos aquí -->
+    <link rel="stylesheet" href="<?php echo WEB_ROOT; ?>/stylesheets/main.css">
+    <style>
+        /* Agrega tus estilos específicos aquí si es necesario */
+    </style>
+</head>
+<body>
+    <?php if (isset($this->allTasks) && is_array($this->allTasks)) : ?>
+        <table class="table-tasks">
+            <thead>
+                <tr>
+                    <th>List Name</th>
+                    <th>Priority</th>
+                    <th>Tasks</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($this->allTasks as $taskList) : ?>
+                    <tr>
+                        <td><?php echo isset($taskList['nombre']) ? $taskList['nombre'] : ''; ?></td>
+                        <td><?php echo isset($taskList['prioridad']) ? $taskList['prioridad'] : ''; ?></td>
+                        <td>
+                            <?php if (isset($taskList['tareas']) && is_array($taskList['tareas'])) : ?>
+                                <ul>
+                                    <?php foreach ($taskList['tareas'] as $taskId) : ?>
+                                        <li><?php echo $taskId; ?></li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            <?php else : ?>
+                                No tasks in this list.
+                            <?php endif; ?>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    <?php else : ?>
+        <p>No task lists available.</p>
+    <?php endif; ?>
+</body>
+</html>
