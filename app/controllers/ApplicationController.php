@@ -195,20 +195,18 @@ class ApplicationController extends Controller{
 		exit;
 	}
 
-	//norberto
-	function createTaskList($taskManager){ //funcion crear lista de tareas !!!!ESTO DEBERIA IR EN EL CONTROLADOR?¿?!!!!
+	function createTaskList($taskManager) { 
         $taskManager->displayAvailableTasks();
         $listaTareas = $taskManager->selectTasksForList();
-    
-        $nombreLista = readline("Introduce el nombre de la lista de tareas ");//cambiar para que se introduzcan los datos a traves del html de la web mediante formulario
+
+        $nombreLista = readline("Introduce el nombre de la lista de tareas ");
         $prioridadLista = (int)readline("Ingresa la prioridad de la lista de tareas: ");
-    
-        //bucle por si introduce un número erróneo (esto ha de controlarse luego mediante html)
-        while ($prioridadLista < 1 || $prioridadLista > 3){
+
+        while ($prioridadLista < 1 || $prioridadLista > 3) {
             echo "La prioridad debe estar entre 1 y 3" . PHP_EOL;
             $prioridadLista = (int)readline("Ingresa la prioridad de la lista de tareas: ");
         }
-    
+
         $lista = [
             'nombre' => $nombreLista,
             'prioridad' => $prioridadLista,
@@ -217,26 +215,26 @@ class ApplicationController extends Controller{
         return $lista;
     }
 
-    public function processTaskList() {//guardar los datos del formulario en el json
-        $taskManager = new TaskManager('../db/dataBase.json');
-        
+    public function processTaskListAction() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $nombreLista = $_POST['nombreLista'];
             $prioridad = $_POST['prioridad'];
-            $tareasSeleccionadas = $_POST['tareas']; 
-            $lista = [
+            $tareasSeleccionadas = isset($_POST['tareas']) ? $_POST['tareas'] : array();
+
+            $nuevaLista = array(
                 'nombre' => $nombreLista,
                 'prioridad' => $prioridad,
                 'tareas' => $tareasSeleccionadas
-            ];
-            
-            $this->saveTaskList($lista);
+            );
 
-            // Después de guardar, podrías redirigir a una página de éxito
-            require('../views/successMessage.php'); //HACERLO CON RUTAS
+            $this->saveTaskList($nuevaLista);
+
+            header("Location: " . WEB_ROOT . "/getTasks");
+            exit();
         }
     }
-        //norberto
+
+    //norberto
     public function createTaskListFormAction() {
         $jsonFilePath = __DIR__ . '/../../db/dataBase.json';
         $jsonContent = file_get_contents($jsonFilePath);

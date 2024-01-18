@@ -10,6 +10,7 @@ class TaskModel extends Model{
     public function __construct(){
         $this-> json = ROOT_PATH . '/db/dataBase.json';
         $this-> jsonUsers = ROOT_PATH . '/db/dataBaseUsers.json';
+
     }
     
 
@@ -147,7 +148,7 @@ class TaskModel extends Model{
         return null; 
     }
 
-      //N update model
+    //N update model
 
     //funciones 
     //mostrar tareas que hay en dataBase
