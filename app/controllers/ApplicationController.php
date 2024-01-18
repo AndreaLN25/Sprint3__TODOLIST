@@ -263,20 +263,50 @@ class ApplicationController extends Controller{
 
         file_put_contents($listaTareasFilePath, json_encode($listasExistentes, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
     }
-
 	public function showTaskListAction() {
 		// Cargar las listas de tareas desde el archivo JSON
 		$listaTareasFilePath = __DIR__ . '/../../db/nuevaLista.json';
 		$jsonContent = file_get_contents($listaTareasFilePath);
 		$listasExistentes = json_decode($jsonContent, true);
-	
+		
 		if ($listasExistentes === null) {
 			die('Error al decodificar el archivo JSON de listas de tareas');
 		}
 	
 		// Asignar las listas a la vista para que puedan ser renderizadas en el PHTML
 		$this->view->allTasks = $listasExistentes;
+
 	}
+
+	public function deleteTaskListAction() {
+		try {
+			if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+				$taskListId = isset($_POST['taskListId']) ? $_POST['taskListId'] : null;
+	
+				if ($taskListId !== null) {
+					$taskListModel = new TaskListModel();
+					$result = $taskListModel->deleteTaskList($taskListId);
+	
+					if ($result === "Task list deleted") {
+						header("Location: " . WEB_ROOT . "/getAllTaskLists");
+						exit();
+					} else {
+						echo "Failed to delete task list. Error: " . $result;
+					}
+				} else {
+					echo "Invalid task list ID.";
+				}
+			} else {
+				echo "Invalid request method. Method: " . $_SERVER['REQUEST_METHOD'];
+			}
+		} catch (Exception $e) {
+			echo "Exception: " . $e->getMessage();
+		}
+	}
+	
+	
+	
+	
 
 	
 }

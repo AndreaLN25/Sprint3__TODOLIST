@@ -25,7 +25,10 @@ $routes = array(
 	'/updateTask' => 'application#updateTask',
 	'/createTaskListForm' => 'application#createTaskListForm',
 	'/processTaskList' => 'application#processTaskList',
-	'/showTaskList' => 'application#showTaskList'
+	'/showTaskList' => 'application#showTaskList',
+	'/deleteTaskList' => 'application#deleteTaskList'
+
+
 
 
 

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="<?php echo WEB_ROOT; ?>/stylesheets/main.css">
+    <title>Delete Task List</title>
+</head>
+
+<body>
+    <h2>Delete Task List</h2>
+
+    <form method="post" action="<?= WEB_ROOT ?>/deleteTaskList">
+        <!-- Campo oculto para especificar el método POST -->
+        <input type="hidden" name="_method" value="POST">
+
+        <label for="taskListId">Select Task List to Delete:</label>
+        <select id="taskListId" name="taskListId">
+            <?php
+            // Leer el contenido del archivo nuevaLista.json
+            $jsonFilePath = __DIR__ . '/../../db/nuevaLista.json';
+            $jsonContent = file_get_contents($jsonFilePath);
+
+            // Decodificar el contenido JSON
+            $listasExistentes = json_decode($jsonContent, true);
+
+            // Verificar si la decodificación fue exitosa
+            if ($listasExistentes !== false) {
+                // Iterar sobre las listas y agregar opciones al desplegable
+                foreach ($listasExistentes as $taskList) {
+                    echo "<option value='" . $taskList['nombre'] . "'>" . $taskList['nombre'] . "</option>";
+                }
+            } else {
+                // Mostrar un mensaje de error si la decodificación falla
+                echo "<option value=''>Error al cargar las listas</option>";
+            }
+            ?>
+        </select>
+
+        <button type="submit">Delete Task List</button>
+    </form>
+
+    <button class="buttongt" onclick="location.href='<?= WEB_ROOT ?>/getTasks'">Back to Tasks</button>
+</body>
+
+</html>
