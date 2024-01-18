@@ -236,27 +236,49 @@ class ApplicationController extends Controller{
             require('../views/successMessage.php'); //HACERLO CON RUTAS
         }
     }
-    //norberto
-	public function createTaskListFormAction() {
-		// Obtener los datos de las tareas desde el archivo JSON
-		$jsonFilePath = __DIR__ . '/../../db/dataBase.json';
-		$jsonContent = file_get_contents($jsonFilePath);
+        //norberto
+    public function createTaskListFormAction() {
+        $jsonFilePath = __DIR__ . '/../../db/dataBase.json';
+        $jsonContent = file_get_contents($jsonFilePath);
+
+        $tasksData = json_decode($jsonContent, true, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+
+        if ($tasksData === null) {
+            die('Error al decodificar el archivo JSON');
+        }
+
+        $this->view->tasksData = $tasksData;
+    }
+
+    // Función para guardar la nueva lista en un archivo JSON
+    private function saveTaskList($lista) {
+        $listaTareasFilePath = __DIR__ . '/../../db/nuevaLista.json';
+        $jsonContent = file_get_contents($listaTareasFilePath);
+
+        $listasExistentes = json_decode($jsonContent, true);
+
+        if ($listasExistentes === null) {
+            $listasExistentes = array();
+        }
+
+        $listasExistentes[] = $lista;
+
+        file_put_contents($listaTareasFilePath, json_encode($listasExistentes, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+    }
+
+	public function showTaskListAction() {
+		// Cargar las listas de tareas desde el archivo JSON
+		$listaTareasFilePath = __DIR__ . '/../../db/nuevaLista.json';
+		$jsonContent = file_get_contents($listaTareasFilePath);
+		$listasExistentes = json_decode($jsonContent, true);
 	
-		// Convertir el contenido del JSON a un arreglo asociativo en PHP
-		$tasksData = json_decode($jsonContent, true);
-	
-		// Verificar si la decodificación fue exitosa
-		if ($tasksData === null) {
-			// Manejar el error, por ejemplo, mostrando un mensaje o redirigiendo a una página de error
-			die('Error al decodificar el archivo JSON');
+		if ($listasExistentes === null) {
+			die('Error al decodificar el archivo JSON de listas de tareas');
 		}
 	
-
-	
-
+		// Asignar las listas a la vista para que puedan ser renderizadas en el PHTML
+		$this->view->allTasks = $listasExistentes;
 	}
-	
-
 
 	
 }
