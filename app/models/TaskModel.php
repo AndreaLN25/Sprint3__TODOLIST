@@ -147,11 +147,7 @@ class TaskModel extends Model{
         return null; 
     }
 
-    //N update model
-    public function __construct($jsonFilePath){
-        //leer el archivo json de tareas y los guarda
-        $this->tasksData = json_decode(file_get_contents($jsonFilePath), true);  
-    }
+      //N update model
 
     //funciones 
     //mostrar tareas que hay en dataBase
