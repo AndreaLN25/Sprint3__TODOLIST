@@ -17,7 +17,6 @@ class TaskListModel {
                 $listasExistentes = array();
             }
 
-            // Buscar y eliminar la lista de tareas por ID
             $indexToDelete = -1;
             foreach ($listasExistentes as $index => $lista) {
                 if (isset($lista['nombre']) && $lista['nombre'] == $taskListId) {
@@ -28,9 +27,8 @@ class TaskListModel {
 
             if ($indexToDelete !== -1) {
                 unset($listasExistentes[$indexToDelete]);
-                $listasExistentes = array_values($listasExistentes); // Reindexar el array
+                $listasExistentes = array_values($listasExistentes); 
 
-                // Guardar el archivo actualizado
                 file_put_contents($this->jsonFilePath, json_encode($listasExistentes, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
                 return "Task list deleted";
             } else {

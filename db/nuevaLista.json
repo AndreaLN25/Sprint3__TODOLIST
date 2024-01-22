@@ -1,14 +1,6 @@
 [
     {
-        "nombre": "ouhuio",
-        "prioridad": "2",
-        "tareas": [
-            "6599c479bcf48",
-            "6599c4ab49c85"
-        ]
-    },
-    {
-        "nombre": "pruebaAAA",
+        "nombre": "Prueba001",
         "prioridad": "1",
         "tareas": [
             "6599b92329624",
@@ -16,15 +8,7 @@
         ]
     },
     {
-        "nombre": "sgdeg",
-        "prioridad": "1",
-        "tareas": [
-            "6599b92329624",
-            "6599be875cf30"
-        ]
-    },
-    {
-        "nombre": "prueba final",
+        "nombre": "aaa",
         "prioridad": "1",
         "tareas": [
             "6599be875cf30",
@@ -33,19 +17,11 @@
         ]
     },
     {
-        "nombre": "222",
-        "prioridad": "3",
-        "tareas": [
-            "6599c479bcf48",
-            "6599c4ab49c85"
-        ]
-    },
-    {
-        "nombre": "333",
+        "nombre": "pruebafinal",
         "prioridad": "1",
         "tareas": [
             "6599b92329624",
-            "6599c479bcf48",
+            "6599be875cf30",
             "6599c4ab49c85"
         ]
     }
