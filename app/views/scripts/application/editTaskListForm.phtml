@@ -12,23 +12,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $selectedListName = $_POST['selectedListName'];
     $newListName = $_POST['newListName'];
 
+    // Redirección relativa a la raíz de la aplicación
     header("Location: " . WEB_ROOT . "/showTaskList");
     exit();
-
 }
 ?>
-
 <form method="post" action="">
     <label for="selectedListName">Selecciona la lista de tareas a editar:</label>
     <select name="selectedListName" required>
         <?php
-        $jsonFilePath = DIR . '/../../../../db/nuevaLista.json';
+        $jsonFilePath = __DIR__ . '/../../../../db/nuevaLista.json';
         $jsonContent = file_get_contents($jsonFilePath);
         $taskLists = json_decode($jsonContent, true);
 
         foreach ($taskLists as $taskList) {
-            echo "<option value="{$taskList['nombre']}">{$taskList['nombre']}</option>;
-            
+            echo "<option value=\"{$taskList['nombre']}\">{$taskList['nombre']}</option>";
         }
         ?>
     </select>
