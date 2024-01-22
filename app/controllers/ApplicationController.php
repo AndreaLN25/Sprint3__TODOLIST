@@ -229,7 +229,7 @@ class ApplicationController extends Controller{
 
             $this->saveTaskList($nuevaLista);
 
-            header("Location: " . WEB_ROOT . "/getTasks");
+            header("Location: " . WEB_ROOT . "/showTaskList");
             exit();
         }
     }

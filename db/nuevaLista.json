@@ -8,14 +8,6 @@
         ]
     },
     {
-        "nombre": "ouhuio",
-        "prioridad": "2",
-        "tareas": [
-            "6599c479bcf48",
-            "6599c4ab49c85"
-        ]
-    },
-    {
         "nombre": "pruebaAAA",
         "prioridad": "1",
         "tareas": [
@@ -29,6 +21,32 @@
         "tareas": [
             "6599b92329624",
             "6599be875cf30"
+        ]
+    },
+    {
+        "nombre": "prueba final",
+        "prioridad": "1",
+        "tareas": [
+            "6599be875cf30",
+            "6599c479bcf48",
+            "6599c4ab49c85"
+        ]
+    },
+    {
+        "nombre": "222",
+        "prioridad": "3",
+        "tareas": [
+            "6599c479bcf48",
+            "6599c4ab49c85"
+        ]
+    },
+    {
+        "nombre": "333",
+        "prioridad": "1",
+        "tareas": [
+            "6599b92329624",
+            "6599c479bcf48",
+            "6599c4ab49c85"
         ]
     }
 ]
