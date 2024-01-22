@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="<?php echo WEB_ROOT; ?>/stylesheets/main.css">
+    <title>Sistema de Login</title>
+</head>
+<body>
+    <div class="login">
+        <?php 
+        if(!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])): ?>
+            <h1>Sistema de Login</h1>
+            <form action="" method="post"> 
+                <label for="username">Usuario</label>
+                <input type="text" name="username" placeholder="Usuario" id="username" required>
+                <label for="password">Contraseña</label>
+                <input type="password" name="password" placeholder="Contraseña" id="password" required>
+                <input type="submit" value="Acceder">
+            </form>
+            <a href="<?= WEB_ROOT; ?>/applicationRegister">Registro</a>
+        <?php else: ?>
+            <h1>Hello, <?php echo isset($_SESSION['username']) ? $_SESSION['username'] : 'Usuario'; ?></h1>
+            <a href="<?php echo WEB_ROOT; ?>/getTasks" class="btn">See all tasks</a>
+        <?php endif; ?>
+    </div>
+    <?php echo $this->mensaje; ?>
+</body>
+</html>
