@@ -1,5 +1,5 @@
 <?php
-
+require_once 'TaskListModel.php';
 /**
  * Base controller for the application.
  * Add general things in this controller.
@@ -279,35 +279,37 @@ class ApplicationController extends Controller{
 	}
 
 	public function deleteTaskListAction() {
-		try {
-			if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-				$taskListId = isset($_POST['taskListId']) ? $_POST['taskListId'] : null;
-	
-				if ($taskListId !== null) {
-					$taskListModel = new TaskListModel();
-					$result = $taskListModel->deleteTaskList($taskListId);
-	
-					if ($result === "Task list deleted") {
-						header("Location: " . WEB_ROOT . "/getAllTaskLists");
-						exit();
-					} else {
-						echo "Failed to delete task list. Error: " . $result;
-					}
-				} else {
-					echo "Invalid task list ID.";
-				}
-			} else {
-				echo "Invalid request method. Method: " . $_SERVER['REQUEST_METHOD'];
-			}
-		} catch (Exception $e) {
-			echo "Exception: " . $e->getMessage();
-		}
-	}
+        try {
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $taskListId = isset($_POST['taskListId']) ? $_POST['taskListId'] : null;
+
+                if ($taskListId !== null) {
+                    $jsonFilePath = __DIR__ . '/../../db/nuevaLista.json'; // Ajusta la ruta según tu estructura de archivos
+                    $taskListModel = new TaskListModel($jsonFilePath); // Pasa la ruta del archivo JSON a TaskListModel
+                    $result = $taskListModel->deleteTaskList($taskListId);
+
+                    if ($result === "Task list deleted") {
+                        header("Location: " . WEB_ROOT . "/showTaskList"); // Cambiado a la acción correcta
+                        exit();
+                    } else {
+                        echo "Failed to delete task list. Error: " . $result;
+                    }
+                } else {
+                    echo "Invalid task list ID.";
+                }
+            } else {
+                echo "Invalid request method. Method: " . $_SERVER['REQUEST_METHOD'];
+            }
+        } catch (Exception $e) {
+            echo "Exception: " . $e->getMessage();
+        }
+    }
+}
 	
 	
 	
 	
 
 	
-}
+
 ?>
