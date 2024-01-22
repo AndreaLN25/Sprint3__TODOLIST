@@ -14,7 +14,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     header("Location: " . WEB_ROOT . "/showTaskList");
     exit();
-
 }
 ?>
 
@@ -27,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $taskLists = json_decode($jsonContent, true);
 
         foreach ($taskLists as $taskList) {
-            echo "<option value="{$taskList['nombre']}">{$taskList['nombre']}</option>";
+            echo "<option value=\"{$taskList['nombre']}\">{$taskList['nombre']}</option>";
         }
         ?>
     </select>
