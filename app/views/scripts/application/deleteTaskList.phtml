@@ -10,12 +10,12 @@
     <h2>Delete Task List</h2>
 
     <?php
-    // Obtener la ruta completa del archivo nuevaLista.json
-    $jsonFilePath = 'C:/xampp/htdocs/Sprint3__TODOLIST-mergeList/db/nuevaLista.json';
+    // Ruta del archivo nuevaLista.json
+    $jsonFilePath = __DIR__ . '/../../../../db/nuevaLista.json';
 
     // Verificar si el archivo existe
     if (file_exists($jsonFilePath)) {
-        // Leer el contenido del archivo nuevaLista.json
+        // Leer el contenido del archivo
         $jsonContent = file_get_contents($jsonFilePath);
 
         // Decodificar el contenido JSON
@@ -23,28 +23,25 @@
 
         // Verificar si la decodificación fue exitosa
         if ($listasExistentes !== null) {
-            if (empty($listasExistentes)) {
-                echo "<p>No hay listas disponibles para eliminar.</p>";
-            } else {
-                echo '<form method="post" action="' . WEB_ROOT . '/deleteTaskList">';
-                echo '<input type="hidden" name="_method" value="POST">';
-                echo '<label for="taskListId">Select Task List to Delete:</label>';
-                echo '<select id="taskListId" name="taskListId">';
+            // Mostrar el formulario y las opciones
+            echo '<form method="post" action="' . WEB_ROOT . '/deleteTaskList">';
+            echo '<input type="hidden" name="_method" value="POST">';
+            echo '<label for="taskListId">Select Task List to Delete:</label>';
+            echo '<select id="taskListId" name="taskListId">';
 
-                foreach ($listasExistentes as $taskList) {
-                    echo "<option value='" . $taskList['nombre'] . "'>" . $taskList['nombre'] . "</option>";
-                }
-
-                echo '</select>';
-                echo '<button type="submit">Delete Task List</button>';
-                echo '</form>';
+            foreach ($listasExistentes as $taskList) {
+                echo "<option value='" . $taskList['nombre'] . "'>" . $taskList['nombre'] . "</option>";
             }
+
+            echo '</select>';
+            echo '<button type="submit">Delete Task List</button>';
+            echo '</form>';
         } else {
             // Mostrar un mensaje de error si la decodificación falla
             echo "<p>Error al cargar las listas.</p>";
         }
     } else {
-        echo "<p>El archivo no existe en la ruta especificada.</p>";
+        echo "<p>El archivo no existe en la ruta especificada: $jsonFilePath</p>";
     }
     ?>
 
