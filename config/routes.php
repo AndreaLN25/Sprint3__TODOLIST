@@ -22,7 +22,17 @@ $routes = array(
 	'/applicationRegister' => 'application#register',
 	'/logout' => 'application#logout',
 	'/editTask' => 'application#editTask',
-	'/updateTask' => 'application#updateTask'
+	'/updateTask' => 'application#updateTask',
+	'/createTaskListForm' => 'application#createTaskListForm',
+	'/processTaskList' => 'application#processTaskList',
+	'/showTaskList' => 'application#showTaskList',
+	'/deleteTaskList' => 'application#deleteTaskList',
+	'/editTaskListForm' => 'application#editTaskListForm',
+    '/updateTaskList' => 'application#updateTaskList'
+
+
+
+
 
 
 );

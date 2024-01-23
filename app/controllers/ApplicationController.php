@@ -1,5 +1,5 @@
 <?php
-
+require_once __DIR__ . '/../models/TaskListModel.php';
 /**
  * Base controller for the application.
  * Add general things in this controller.
@@ -200,6 +200,183 @@ class ApplicationController extends Controller{
 		header("Location: " . WEB_ROOT."/test");
 		exit;
 	}
+
+	function createTaskList($taskManager) { 
+        $taskManager->displayAvailableTasks();
+        $listaTareas = $taskManager->selectTasksForList();
+
+        $nombreLista = readline("Introduce el nombre de la lista de tareas ");
+        $prioridadLista = (int)readline("Ingresa la prioridad de la lista de tareas: ");
+
+        while ($prioridadLista < 1 || $prioridadLista > 3) {
+            echo "La prioridad debe estar entre 1 y 3" . PHP_EOL;
+            $prioridadLista = (int)readline("Ingresa la prioridad de la lista de tareas: ");
+        }
+
+        $lista = [
+            'nombre' => $nombreLista,
+            'prioridad' => $prioridadLista,
+            'tareas' => $listaTareas
+        ];
+        return $lista;
+    }
+
+    public function processTaskListAction() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $nombreLista = $_POST['nombreLista'];
+            $prioridad = $_POST['prioridad'];
+            $tareasSeleccionadas = isset($_POST['tareas']) ? $_POST['tareas'] : array();
+
+            $nuevaLista = array(
+                'nombre' => $nombreLista,
+                'prioridad' => $prioridad,
+                'tareas' => $tareasSeleccionadas
+            );
+
+            $this->saveTaskList($nuevaLista);
+
+            header("Location: " . WEB_ROOT . "/showTaskList");
+            exit();
+        }
+    }
+
+    //norberto
+    public function createTaskListFormAction() {
+        $jsonFilePath = __DIR__ . '/../../db/dataBase.json';
+        $jsonContent = file_get_contents($jsonFilePath);
+
+        $tasksData = json_decode($jsonContent, true, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+
+        if ($tasksData === null) {
+            die('Error al decodificar el archivo JSON');
+        }
+
+        $this->view->tasksData = $tasksData;
+    }
+
+    private function saveTaskList($lista) {
+        $listaTareasFilePath = __DIR__ . '/../../db/nuevaLista.json';
+        $jsonContent = file_get_contents($listaTareasFilePath);
+
+        $listasExistentes = json_decode($jsonContent, true);
+
+        if ($listasExistentes === null) {
+            $listasExistentes = array();
+        }
+
+        $listasExistentes[] = $lista;
+
+        file_put_contents($listaTareasFilePath, json_encode($listasExistentes, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+    }
+	public function showTaskListAction() {
+		$listaTareasFilePath = __DIR__ . '/../../db/nuevaLista.json';
+		$jsonContent = file_get_contents($listaTareasFilePath);
+		$listasExistentes = json_decode($jsonContent, true);
+		
+		if ($listasExistentes === null) {
+			die('Error al decodificar el archivo JSON de listas de tareas');
+		}
 	
+		$this->view->allTasks = $listasExistentes;
+
+	}
+
+	public function deleteTaskListAction() {
+        try {
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $taskListId = isset($_POST['taskListId']) ? $_POST['taskListId'] : null;
+
+                if ($taskListId !== null) {
+                    $jsonFilePath = __DIR__ . '/../../db/nuevaLista.json'; 
+                    $taskListModel = new TaskListModel($jsonFilePath); 
+                    $result = $taskListModel->deleteTaskList($taskListId);
+
+                    if ($result === "Task list deleted") {
+                        header("Location: " . WEB_ROOT . "/showTaskList"); 
+                        exit();
+                    } else {
+                        echo "Failed to delete task list. Error: " . $result;
+                    }
+                } else {
+                    echo "Invalid task list ID.";
+                }
+            } else {
+            }
+        } catch (Exception $e) {
+            echo "Exception: " . $e->getMessage();
+        }
+    }
+	private $jsonFilePath = __DIR__ . '/../../db/nuevaLista.json';
+
+
+    private function findListIndex($taskLists, $selectedListName) {
+        foreach ($taskLists as $index => $taskList) {
+            if ($taskList['nombre'] === $selectedListName) {
+                return $index;
+            }
+        }
+        return false;
+    }
+
+    private function saveTaskLists($taskLists) {
+        file_put_contents($this->jsonFilePath, json_encode($taskLists, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+    }
+
+    private function getTaskLists() {
+        $jsonContent = file_get_contents($this->jsonFilePath);
+        $taskLists = json_decode($jsonContent, true);
+
+        if ($taskLists === null) {
+            die('Error al decodificar el archivo JSON de listas de tareas');
+        }
+
+        return $taskLists;
+    }
+
+    private function isValidListName($listName) {
+        return !empty($listName);
+    }
+
+    private function updateListName($selectedListName, $newListName) {
+        $taskLists = $this->getTaskLists();
+        $selectedListIndex = $this->findListIndex($taskLists, $selectedListName);
+
+        if ($selectedListIndex !== false) {
+            $taskLists[$selectedListIndex]['nombre'] = $newListName;
+            $this->saveTaskLists($taskLists);
+        } else {
+            echo "Error: Lista no encontrada.";
+        }
+    }
+
+    public function editTaskListFormAction() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $selectedListName = $_POST['selectedListName'];
+            $newListName = $_POST['newListName'];
+
+            if ($this->isValidListName($selectedListName) && $this->isValidListName($newListName)) {
+                $this->updateListName($selectedListName, $newListName);
+                echo "Nombre de la lista actualizado exitosamente.";
+                return;
+            } else {
+                echo "Error: Nombres de lista no válidos.";
+                return;
+            }
+        }
+
+        $taskLists = $this->getTaskLists();
+        $this->view->taskLists = $taskLists;
+    }
 }
+	
+
+	
+
+	
+	
+	
+	
+
+	
+
 ?>
