@@ -26,9 +26,15 @@
 
         <label for="tareas">Seleccione las Tareas:</label>
         <select name="tareas[]" multiple>
-            <?php foreach ($this->tasksData['tasks'] as $task) : ?>
+            <?php 
+            foreach ($this->tasksData['tasks'] as $task) : 
+                if ($task['task_created_by'] === $_SESSION['username']) {
+            ?>
                 <option value="<?= $task['task_id']; ?>"><?= $task['task_description']; ?></option>
-            <?php endforeach; ?>
+            <?php 
+                } 
+            endforeach; 
+            ?>
         </select>
         <br>
 
