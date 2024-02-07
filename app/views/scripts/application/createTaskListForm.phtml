@@ -22,6 +22,8 @@
         </select>
         <br>
 
+        <input type="hidden" name="usuario" value="<?= $_SESSION['username']; ?>">
+
         <label for="tareas">Seleccione las Tareas:</label>
         <select name="tareas[]" multiple>
             <?php foreach ($this->tasksData['tasks'] as $task) : ?>
