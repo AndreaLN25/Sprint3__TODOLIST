@@ -10,11 +10,11 @@
     <h2>Create Task List</h2>
 
     <form method="post" action="<?= WEB_ROOT ?>/processTaskList">
-        <label for="nombreLista">Nombre de la Lista:</label>
+        <label for="nombreLista">List Name:</label>
         <input type="text" name="nombreLista" required>
         <br>
 
-        <label for="prioridad">Prioridad:</label>
+        <label for="prioridad">Priority:</label>
         <select name="prioridad" required>
             <option value="1">1</option>
             <option value="2">2</option>
@@ -24,7 +24,7 @@
 
         <input type="hidden" name="usuario" value="<?= $_SESSION['username']; ?>">
 
-        <label for="tareas">Seleccione las Tareas:</label>
+        <label for="tareas">Select Tasks:</label>
         <select name="tareas[]" multiple>
             <?php 
             foreach ($this->tasksData['tasks'] as $task) : 
@@ -38,7 +38,7 @@
         </select>
         <br>
 
-        <button type="submit">Crear Lista</button>
+        <button type="submit">Create List</button>
     </form>
 </body>
 

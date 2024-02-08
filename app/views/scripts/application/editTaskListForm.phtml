@@ -3,43 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Nombre de Lista de Tareas</title>
+    <title>Edit Task List</title>
 </head>
 <body>
 
-<?php
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $selectedListName = $_POST['selectedListName'];
-    $newListName = $_POST['newListName'];
-
-    // Redirección relativa a la raíz de la aplicación
-    header("Location: " . WEB_ROOT . "/showTaskList");
-    exit();
-}
-?>
 <form method="post" action="">
-    <label for="selectedListName">Selecciona la lista de tareas a editar:</label>
+    <label for="selectedListName">Select Task List to edit:</label>
     <select name="selectedListName" required>
         <?php
-        $jsonFilePath = __DIR__ . '/../../../../db/nuevaLista.json';
-        $jsonContent = file_get_contents($jsonFilePath);
-        $taskLists = json_decode($jsonContent, true);
+        $username = $_SESSION['username']; 
 
-        foreach ($taskLists as $taskList) {
-            echo "<option value=\"{$taskList['nombre']}\">{$taskList['nombre']}</option>";
+        $jsonFilePath = __DIR__ . '/../../../../db/nuevaLista.json';
+
+        if (file_exists($jsonFilePath)) {
+            $jsonContent = file_get_contents($jsonFilePath);
+
+            $taskLists = json_decode($jsonContent, true);
+
+            if ($taskLists !== null) {
+                foreach ($taskLists as $taskList) {
+                    if ($taskList['usuario'] === $username) {
+                        echo "<option value=\"{$taskList['nombre']}\">{$taskList['nombre']}</option>";
+                    }
+                }
+            } else {
+                echo "<option>No se han encontrado listas de tareas</option>";
+            }
+        } else {
+            echo "<option>No se ha encontrado el archivo de listas de tareas</option>";
         }
         ?>
     </select>
 
     <br>
 
-    <label for="newListName">Nuevo nombre de la lista de tareas:</label>
+    <label for="newListName">New Task List name:</label>
     <input type="text" name="newListName" required>
 
     <br>
 
-    <input type="submit" value="Editar Nombre de Lista">
+    <label for="selectedTasks">Select new Tasks:</label>
+    <select name="selectedTasks[]" multiple required>
+        <?php
+        $username = $_SESSION['username']; 
+
+        $jsonTasksFilePath = __DIR__ . '/../../../../db/dataBase.json';
+
+        if (file_exists($jsonTasksFilePath)) {
+            $jsonTasksContent = file_get_contents($jsonTasksFilePath);
+
+            $tasks = json_decode($jsonTasksContent, true)['tasks'];
+
+            foreach ($tasks as $task) {
+                if ($task['task_created_by'] == $username) {
+                    echo "<option value=\"{$task['task_id']}\">{$task['task_description']}</option>";
+                }
+            }
+        } else {
+            echo "<option>No se ha encontrado el archivo de tareas</option>";
+        }
+        ?>
+    </select>
+
+    <br>
+
+    <input type="submit" value="Edit Task List">
 </form>
 
 </body>
 </html>
+
+
