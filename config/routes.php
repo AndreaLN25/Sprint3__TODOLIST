@@ -12,7 +12,7 @@
 $routes = array(
 
 	'/test' => 'test#index',
-	'/' => 'application#index',
+	'/' => 'test#index',
 	//'/' =>  'application#getTasks',
 	'/getTasks' => 'application#getTasks',
 	'/createTask' => 'application#createTask',
