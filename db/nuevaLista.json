@@ -1,6 +1,6 @@
 [
     {
-        "nombre": "PRUEBA002",
+        "nombre": "PRUEBA01",
         "prioridad": "1",
         "tareas": [
             "6599b92329624",
@@ -8,7 +8,7 @@
         ]
     },
     {
-        "nombre": "bbb",
+        "nombre": "ccc",
         "prioridad": "1",
         "tareas": [
             "6599be875cf30",
@@ -26,7 +26,7 @@
         ]
     },
     {
-        "nombre": "mameluco",
+        "nombre": "camion2",
         "prioridad": "2",
         "tareas": [
             "6599b92329624",
@@ -36,5 +36,30 @@
             "659b18e046c41",
             "659b279f3e57a"
         ]
+    },
+    {
+        "nombre": "pakito",
+        "prioridad": "2",
+        "tareas": [
+            "6599c479bcf48",
+            "659b279f3e57a"
+        ]
+    },
+    {
+        "nombre": "pakito3",
+        "prioridad": "1",
+        "tareas": [
+            "6599c479bcf48",
+            "659b27ede0bc7"
+        ]
+    },
+    {
+        "nombre": "pakito666",
+        "prioridad": "1",
+        "tareas": [
+            "6599c479bcf48",
+            "659b279f3e57a"
+        ],
+        "usuario": "ramiro"
     }
 ]
