@@ -201,25 +201,26 @@ class ApplicationController extends Controller{
 		exit;
 	}
 
-	function createTaskList($taskManager) { 
-        $taskManager->displayAvailableTasks();
-        $listaTareas = $taskManager->selectTasksForList();
-
-        $nombreLista = readline("Introduce el nombre de la lista de tareas ");
-        $prioridadLista = (int)readline("Ingresa la prioridad de la lista de tareas: ");
-
-        while ($prioridadLista < 1 || $prioridadLista > 3) {
-            echo "La prioridad debe estar entre 1 y 3" . PHP_EOL;
-            $prioridadLista = (int)readline("Ingresa la prioridad de la lista de tareas: ");
-        }
-
-        $lista = [
-            'nombre' => $nombreLista,
-            'prioridad' => $prioridadLista,
-            'tareas' => $listaTareas
-        ];
-        return $lista;
-    }
+	function createTaskList($taskManager, $username) { 
+		$taskManager->displayAvailableTasks();
+		$listaTareas = $taskManager->selectTasksForList();
+	
+		$nombreLista = readline("Introduce el nombre de la lista de tareas ");
+		$prioridadLista = (int)readline("Ingresa la prioridad de la lista de tareas: ");
+	
+		while ($prioridadLista < 1 || $prioridadLista > 3) {
+			echo "La prioridad debe estar entre 1 y 3" . PHP_EOL;
+			$prioridadLista = (int)readline("Ingresa la prioridad de la lista de tareas: ");
+		}
+	
+		$lista = [
+			'nombre' => $nombreLista,
+			'prioridad' => $prioridadLista,
+			'usuario' => $username, 
+			'tareas' => $listaTareas
+		];
+		return $lista;
+	}
 
     public function processTaskListAction() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -230,7 +231,9 @@ class ApplicationController extends Controller{
             $nuevaLista = array(
                 'nombre' => $nombreLista,
                 'prioridad' => $prioridad,
-                'tareas' => $tareasSeleccionadas
+                'tareas' => $tareasSeleccionadas,
+				'usuario' => $_SESSION['username'] 
+
             );
 
             $this->saveTaskList($nuevaLista);
@@ -272,14 +275,24 @@ class ApplicationController extends Controller{
 		$listaTareasFilePath = __DIR__ . '/../../db/nuevaLista.json';
 		$jsonContent = file_get_contents($listaTareasFilePath);
 		$listasExistentes = json_decode($jsonContent, true);
-		
+	
 		if ($listasExistentes === null) {
 			die('Error al decodificar el archivo JSON de listas de tareas');
 		}
 	
-		$this->view->allTasks = $listasExistentes;
-
+		$username = isset($_SESSION['username']) ? $_SESSION['username'] : null;
+	
+		if ($username !== null) {
+			$userTaskLists = array_filter($listasExistentes, function($lista) use ($username) {
+				return isset($lista['usuario']) && $lista['usuario'] === $username;
+			});
+	
+			$this->view->userTaskLists = $userTaskLists;
+		} else {
+			echo "Nombre de usuario no definido en la sesión.";
+		}
 	}
+	
 
 	public function deleteTaskListAction() {
         try {

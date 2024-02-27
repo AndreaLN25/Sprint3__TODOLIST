@@ -3,25 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Task List</title>
+    <title>Editar Nombre y Tareas de Lista de Tareas</title>
 </head>
 <body>
 
 <form method="post" action="">
-    <label for="selectedListName">Select Task List to edit:</label>
+    <label for="selectedListName">Selecciona la lista de tareas a editar:</label>
     <select name="selectedListName" required>
         <?php
+        // Obtener el nombre de usuario actual desde la sesión
         $username = $_SESSION['username']; 
 
+        // Ruta del archivo nuevaLista.json
         $jsonFilePath = __DIR__ . '/../../../../db/nuevaLista.json';
 
+        // Verificar si el archivo existe
         if (file_exists($jsonFilePath)) {
+            // Leer el contenido del archivo
             $jsonContent = file_get_contents($jsonFilePath);
 
+            // Decodificar el contenido JSON
             $taskLists = json_decode($jsonContent, true);
 
+            // Verificar si la decodificación fue exitosa
             if ($taskLists !== null) {
+                // Filtrar las listas de tareas por el nombre de usuario actual
                 foreach ($taskLists as $taskList) {
+                    // Verificar si la lista de tareas pertenece al usuario actual
                     if ($taskList['usuario'] === $username) {
                         echo "<option value=\"{$taskList['nombre']}\">{$taskList['nombre']}</option>";
                     }
@@ -37,12 +45,12 @@
 
     <br>
 
-    <label for="newListName">New Task List name:</label>
+    <label for="newListName">Nuevo nombre de la lista de tareas:</label>
     <input type="text" name="newListName" required>
 
     <br>
 
-    <label for="selectedTasks">Select new Tasks:</label>
+    <label for="selectedTasks">Selecciona las nuevas tareas:</label>
     <select name="selectedTasks[]" multiple required>
         <?php
         $username = $_SESSION['username']; 
@@ -67,7 +75,7 @@
 
     <br>
 
-    <input type="submit" value="Edit Task List">
+    <input type="submit" value="Editar Nombre y Tareas de Lista">
 </form>
 
 </body>

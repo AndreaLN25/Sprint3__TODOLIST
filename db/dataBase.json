@@ -1,17 +1,6 @@
 {
     "tasks": [
-        {
-            "task_id": "6599be875cf30",
-            "task_description": "",
-            "task_status": "pending",
-            "task_creation_date": "2024-01-06 21:56",
-            "task_updated_at": "2024-01-06 21:56",
-            "task_deadline": "",
-            "task_assigned_to": 0,
-            "task_created_by": 1,
-            "task_updated_by": 1,
-            "task_priority": "1"
-        },
+        
         {
             "task_id": "6599c479bcf48",
             "task_description": "prueba",
@@ -37,18 +26,6 @@
             "task_priority": "3"
         },
         {
-            "task_id": "659b18e046c41",
-            "task_description": "",
-            "task_status": "pending",
-            "task_creation_date": "2024-01-07 22:34",
-            "task_updated_at": "2024-01-07 22:34",
-            "task_deadline": "",
-            "task_assigned_to": 0,
-            "task_created_by": 1,
-            "task_updated_by": 1,
-            "task_priority": "1"
-        },
-        {
             "task_id": "659b279f3e57a",
             "task_description": "prueba creacion tarea desde form",
             "task_status": "pending",
@@ -72,18 +49,7 @@
             "task_updated_by": 1,
             "task_priority": "2"
         },
-        {
-            "task_id": "659b2a0ddc7ca",
-            "task_description": "",
-            "task_status": "pending",
-            "task_creation_date": "2024-01-07 23:47",
-            "task_updated_at": "2024-01-07 23:47",
-            "task_deadline": "",
-            "task_assigned_to": 0,
-            "task_created_by": 1,
-            "task_updated_by": 1,
-            "task_priority": "1"
-        },
+
         {
             "task_id": "659bc8bb16a90",
             "task_description": "prueba tareas usuario",
@@ -108,42 +74,7 @@
             "task_updated_by": 1,
             "task_priority": "1"
         },
-        {
-            "task_id": "659bc8ed7a871",
-            "task_description": "",
-            "task_status": "pending",
-            "task_creation_date": "2024-01-08 11:05",
-            "task_updated_at": "2024-01-08 11:05",
-            "task_deadline": "",
-            "task_assigned_to": 0,
-            "task_created_by": 1,
-            "task_updated_by": 1,
-            "task_priority": "1"
-        },
-        {
-            "task_id": "659bcc1e226c3",
-            "task_description": "",
-            "task_status": "pending",
-            "task_creation_date": "2024-01-08 11:19",
-            "task_updated_at": "2024-01-08 11:19",
-            "task_deadline": "",
-            "task_assigned_to": 0,
-            "task_created_by": 1,
-            "task_updated_by": 1,
-            "task_priority": "1"
-        },
-        {
-            "task_id": "659bcc9a211ec",
-            "task_description": "",
-            "task_status": "pending",
-            "task_creation_date": "2024-01-08 11:21",
-            "task_updated_at": "2024-01-08 11:21",
-            "task_deadline": "",
-            "task_assigned_to": 0,
-            "task_created_by": 1,
-            "task_updated_by": 1,
-            "task_priority": "1"
-        },
+
         {
             "task_id": "659be44eb68b2",
             "task_description": "estudiar",
@@ -204,18 +135,7 @@
             "task_updated_by": "juan",
             "task_priority": "2"
         },
-        {
-            "task_id": "659d5469e08bd",
-            "task_description": "",
-            "task_status": "pending",
-            "task_creation_date": "2024-01-09 15:12",
-            "task_updated_at": "2024-01-09 15:12",
-            "task_deadline": "",
-            "task_assigned_to": 0,
-            "task_created_by": "juan",
-            "task_updated_by": "juan",
-            "task_priority": "1"
-        },
+
         {
             "task_id": "659d547b0ce4b",
             "task_description": "nadar ",
@@ -236,42 +156,6 @@
             "task_updated_at": "2024-01-09 15:14",
             "task_deadline": "2024-01-23",
             "task_assigned_to": 2,
-            "task_created_by": "juan",
-            "task_updated_by": "juan",
-            "task_priority": "1"
-        },
-        {
-            "task_id": "659d54e0e4550",
-            "task_description": "",
-            "task_status": "pending",
-            "task_creation_date": "2024-01-09 15:14",
-            "task_updated_at": "2024-01-09 15:14",
-            "task_deadline": "",
-            "task_assigned_to": 0,
-            "task_created_by": "juan",
-            "task_updated_by": "juan",
-            "task_priority": "1"
-        },
-        {
-            "task_id": "659d54e89f272",
-            "task_description": "",
-            "task_status": "pending",
-            "task_creation_date": "2024-01-09 15:15",
-            "task_updated_at": "2024-01-09 15:15",
-            "task_deadline": "",
-            "task_assigned_to": 0,
-            "task_created_by": "juan",
-            "task_updated_by": "juan",
-            "task_priority": "1"
-        },
-        {
-            "task_id": "659d55137f6ff",
-            "task_description": "",
-            "task_status": "pending",
-            "task_creation_date": "2024-01-09 15:15",
-            "task_updated_at": "2024-01-09 15:15",
-            "task_deadline": "",
-            "task_assigned_to": 0,
             "task_created_by": "juan",
             "task_updated_by": "juan",
             "task_priority": "1"
