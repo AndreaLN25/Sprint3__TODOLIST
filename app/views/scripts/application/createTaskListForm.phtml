@@ -30,7 +30,7 @@
             foreach ($this->tasksData['tasks'] as $task) : 
                 if ($task['task_created_by'] === $_SESSION['username']) {
             ?>
-                <option value="<?= $task['task_id']; ?>"><?= $task['task_description']; ?></option>
+                <option value="<?= $task['task_description']; ?>"><?= $task['task_description']; ?></option>
             <?php 
                 } 
             endforeach; 
