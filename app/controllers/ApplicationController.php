@@ -24,7 +24,17 @@ class ApplicationController extends Controller{
 			if(isset($_SESSION["username"])){  
 				$user_id = $_SESSION["username"];
 				$creationDate = isset($_POST['task_creation_date']) ? $_POST["task_creation_date"] : "";
-				$taskDeadline = date('Y-m-d', strtotime($creationDate . ' +1 month'));
+				//$taskDeadline = date('Y-m-d', strtotime($creationDate . ' +1 month'));
+				$creationDateFormatted = date('Y-m-d', strtotime($creationDate));
+				$taskDeadline = isset($_POST["task_deadline"]) ? date('Y-m-d', strtotime($_POST["task_deadline"])) : "";
+
+				if (strtotime($taskDeadline) < strtotime($creationDateFormatted)) {
+					echo "<script>
+							alert('Error: La fecha límite no puede ser anterior a la fecha de creación.');
+							window.history.back(); // Para volver a la página anterior
+						  </script>";
+					exit();
+				}
 				$task_id = uniqid();
 				$newTask = array(
 					"task_id" => $task_id,
