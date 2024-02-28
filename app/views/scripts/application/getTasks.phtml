@@ -56,11 +56,11 @@
                                     <td>
                                         <form method="post" action="<?= WEB_ROOT ?>/editTask">
                                             <input type="hidden" name="task_id" value="<?php echo $task['task_id']; ?>">
-                                            <button class="buttongt" type="submit">Editar</button>
+                                            <button class="buttongt" type="submit">Edit</button>
                                         </form>
                                         <form method="post" action="<?= WEB_ROOT ?>/deleteTask">
                                             <input type="hidden" name="task_id" value="<?php echo $task['task_id']; ?>">
-                                            <button class="buttongt" type="submit">Eliminar</button>
+                                            <button class="buttongt" type="submit">Delete</button>
                                         </form>
                                     </td>
                                 </tr>
@@ -71,10 +71,10 @@
                                 
                 <button class="buttongt" onclick="location.href='<?= WEB_ROOT ?>/createTask'">Create New Task</button>
                 <!-- <button class="buttongt" onclick="location.href='<?= WEB_ROOT ?>/getTaskById'">Search Task By Id</button> -->
-                <button class="buttongt" onclick="location.href='<?= WEB_ROOT ?>/createTaskListForm'">Create Tasks Lists </button>
+<!--                 <button class="buttongt" onclick="location.href='<?= WEB_ROOT ?>/createTaskListForm'">Create Tasks Lists </button>
                 <button class="buttongt" onclick="location.href='<?= WEB_ROOT ?>/showTaskList'">Show Tasks Lists </button>
                 <button class="buttongt" onclick="location.href='<?= WEB_ROOT ?>/deleteTaskList'">Delete Tasks Lists </button>
-                <button class="buttongt" onclick="location.href='<?= WEB_ROOT ?>/editTaskListForm'">Edit Task List</button>
+                <button class="buttongt" onclick="location.href='<?= WEB_ROOT ?>/editTaskListForm'">Edit Task List</button> -->
 
             <?php else : ?>
                 <p>No tasks available for this user.</p>
