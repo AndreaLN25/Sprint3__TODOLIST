@@ -83,7 +83,11 @@ nav a.logout-link {
 .btn-black:hover {
     background-color: #333; 
 }
+/* tabla*/
 
+.table-container {
+    margin: 20px; /* Agrega márgenes al contenedor de la tabla */
+}
 
 /* Estilos de botones */
 .buttongt {
@@ -101,6 +105,24 @@ nav a.logout-link {
 
 .buttongt:hover {
     background-color: #333; 
+}
+
+.button-no-outline {
+    background-color: #000;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    margin-right: 30px;
+    margin-left: 50px;
+    outline: none; /* Quítale el resaltado */
+}
+
+.button-no-outline:hover {
+    background-color: #333;
 }
 
 /* LOGIN */
@@ -168,10 +190,9 @@ h1 {
 form {
     max-width: 400px;
     margin: 0 auto;
-    background-color: #fff; 
-    padding: 20px;
+    padding: 10px;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+
 }
 
 label {
